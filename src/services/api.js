@@ -1,12 +1,12 @@
 const API_ROOT = "http://localhost:3000/api/v1"
 
-const token = () => localStorage.getItem("token");
+const userToken = () => localStorage.getItem("userToken");
 
 const headers = () => {
   return {
     "Content-Type": "application/json",
     Accept: "application/json",
-    Authorization: token()
+    Authorization: userToken()
   };
 };
 
@@ -37,11 +37,27 @@ const createUser = (data) => {
   }).then(res => res.json())
 };
 
+const getFavorites = () => {
+  return fetch(`${API_ROOT}/favorites`, {
+    headers: headers()
+  }).then(res => res.json())
+};
+
+const getMessages = () => {
+  return fetch(`${API_ROOT}/messages`, {
+    headers: headers()
+  }).then(res => res.json())
+};
+
 
 export const api = {
   auth: {
     login,
     getCurrentUser,
     createUser
+  },
+  getRequests: {
+    getFavorites,
+    getMessages
   }
 };

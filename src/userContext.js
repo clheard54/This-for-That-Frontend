@@ -4,7 +4,10 @@ import { api } from './services/api'
 // this is the equivalent to the createStore method of Redux
 // https://redux.js.org/api/createstore
 
-const userContext = React.createContext([{}, ()=> {}]);
+const UserContext = React.createContext();
 
-export default userContext
+const UserProvider = UserContext.Provider;
+const UserConsumer = UserContext.Consumer;
 
+export {UserProvider, UserConsumer}
+export default UserContext;

@@ -22,8 +22,6 @@ const userProvider = ({children}) => {
     )
   }
 
-
-
 // const userProvider = (props) => {
     //store App-wide state here instead of in App component
     // const [state, setState] = useState({})
@@ -44,7 +42,7 @@ const userProvider = ({children}) => {
             //     })
             // },
             // userLogout: () => {
-            //     localStorage.removeItem('token')
+            //     localStorage.removeItem('userToken')
             //     this.setState({
             //         current_user: null
             //     })
@@ -65,8 +63,8 @@ const userProvider = ({children}) => {
 //       }
     
 //       componentDidMount() {
-//         const token = localStorage.getItem("token");
-//         if (token) {
+//         const userToken = localStorage.getItem("userToken");
+//         if (userToken) {
 //           // make a request to the backend and find our user
 //           api.auth.getCurrentUser().then(user => {
 //             this.setState({
@@ -92,7 +90,7 @@ const userProvider = ({children}) => {
 //                         })
 //                     },
 //                     userLogout: () => {
-//                         localStorage.removeItem('token')
+//                         localStorage.removeItem('userToken')
 //                         this.setState({
 //                             current_user: null
 //                         })

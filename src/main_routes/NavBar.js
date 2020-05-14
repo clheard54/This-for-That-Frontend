@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from 'react'
-import userContext from '../userContext';
+import UserConsumer from '../userContext';
 
 class NavBar extends React.Component {
 
@@ -10,7 +10,7 @@ class NavBar extends React.Component {
 
     render(){
         return (
-            <userContext.Consumer>
+            <UserConsumer>
               {context => (
                 <div id="SideNav" class="sidenav">
                     <a href="javascript:void(0)" class="closebtn" onClick={this.closeNav}>&times;</a>
@@ -18,10 +18,10 @@ class NavBar extends React.Component {
                     <a href="/add_post">Post an Offering</a>
                     <a href="/catolog">Browse Items</a>
                     <a href="/inbox">Inbox</a>
-                    <a href="/logout" onClick={this.props.userLogout}>Logout</a>
+                    <a href="/logout" onClick={context.userLogout}>Logout</a>
                 </div>
               )}
-            </userContext.Consumer>
+            </UserConsumer>
         )
     }
 }
