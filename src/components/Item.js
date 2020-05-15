@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import UserContext from '../context/userContext'
+import {Link} from 'react-router-dom'
  
 
 const Item = props => {
@@ -7,6 +8,7 @@ const Item = props => {
     const {item} = props
 
     return (
+        <div className="col col-md-3">
         <div className="card">
             {/*image somewhere*/}
             <div className="card-body">
@@ -15,6 +17,7 @@ const Item = props => {
                     <p className="card-text">{item.description}.<br/>
                     Location: {item.location}<br/>
                     Estimated Value: {item.value}</p>
+                    <Link to={`/items/${item.id}`}><button>Detail</button></Link>
                     <p className="card-text"><small className="text-muted">Posted {item.created_at}</small></p>
             </div>
             <div className='column'>
@@ -22,7 +25,10 @@ const Item = props => {
             </div>
             </div>
         </div>
+        </div>
     )
 }
 
 export default Item;
+
+

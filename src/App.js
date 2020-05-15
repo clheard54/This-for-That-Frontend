@@ -101,6 +101,11 @@ class App extends React.Component {
 
               <Route 
                 exact
+                path='/items/:tag' 
+                render={props => <ItemsCatalog {...props}/>} />
+
+              <Route 
+                exact
                 path='/services' 
                 render={props => <ServicesCatalog {...props}/>} /> 
 

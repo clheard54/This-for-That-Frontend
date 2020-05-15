@@ -63,6 +63,20 @@ const getServices = () => {
   }).then(res => res.json())
 };
 
+const getTags = () => {
+  return fetch(`${API_ROOT}/tags`, {
+    headers: headers()
+  }).then(res => res.json())
+};
+
+const postItem = (newItem) => {
+  return fetch(`${API_ROOT}/items`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify({item: newItem})
+  }).then(res => res.json())
+}
+
 
 export const api = {
   auth: {
@@ -74,6 +88,10 @@ export const api = {
     getFavorites,
     getMessages,
     getItems,
-    getServices
+    getServices,
+    getTags
+  },
+  posts: {
+    postItem
   }
 };

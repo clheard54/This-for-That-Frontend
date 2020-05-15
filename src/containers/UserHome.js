@@ -11,8 +11,7 @@ class UserHome extends Component{
             <Inbox />
         </div>
         <div className="col" >
-            <button>Browse Items</button>
-            <button>Browse Services</button>
+            <button onClick={()=>this.props.history.push('/catalog')}>Browse Catalog of Offerings</button><br/>
             <button>Post an Offering</button>
         </div>
         <div className="col" id="favorites">
