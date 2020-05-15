@@ -20,7 +20,7 @@ class Inbox extends Component{
 
     render(){
         return (
-            <div className='bordered'>
+            <div>
                 <p>These are your messages</p>
             </div>
         )

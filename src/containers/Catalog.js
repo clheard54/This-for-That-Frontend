@@ -50,3 +50,46 @@ const Catalog = props => {
 }
 
 export default Catalog;
+
+/*
+Categories:
+STUFF:
+-antiques
+-appliances
+-arts+crafts
+-car,truck;motorcycle
+-beauty+hlth
+-bikes
+-books
+-tech
+-clothes+acc
+-electronics
+-farm+garden
+-furniture
+-kids + babies
+-materials
+-music
+-sports + equip
+-tickets
+-tools
+-toys+games
+
+TASKS:
+-yardwork, farm+garden
+-skilled trade: plumbing, electric, automotive
+-physical labor / moving
+-cleaning
+-babysitting / caretaking
+-cooking
+-driving
+-miscellaneous
+-legal services
+-medical services
+-education
+-beauty / personal care
+-tech
+-creative
+-financial
+-pets
+-real estate
+*/

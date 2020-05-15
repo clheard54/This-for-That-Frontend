@@ -21,11 +21,18 @@ function LandingPage(props){
         </filter>
         </svg>
         <div className="flex-container">
-            {!localStorage.getItem('userToken') ?
             <div className='col'>
+            {!localStorage.getItem('userToken') ?
+            <>
               <p>Please Log In or Sign Up below.</p> 
               <Login />
-            </div> : null } 
+            </>
+              : 
+            <>
+              <h4>You're logged in!<br/> Head to your profile</h4><br/> 
+              <button onClick={() => props.history.push('/profile')}>My Profile</button>
+              </>}
+            </div>  
             <img id='trade-circle' src="https://i.ya-webdesign.com/images/trade-drawing-barter-1.gif" alt="trade that"></img>
         </div>
         </Fragment>
