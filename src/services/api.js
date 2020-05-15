@@ -50,6 +50,20 @@ const getMessages = () => {
 };
 
 
+const getItems = () => {
+  return fetch(`${API_ROOT}/items`, {
+    headers: headers()
+  }).then(res => res.json())
+};
+
+
+const getServices = () => {
+  return fetch(`${API_ROOT}/services`, {
+    headers: headers()
+  }).then(res => res.json())
+};
+
+
 export const api = {
   auth: {
     login,
@@ -58,6 +72,8 @@ export const api = {
   },
   getRequests: {
     getFavorites,
-    getMessages
+    getMessages,
+    getItems,
+    getServices
   }
 };

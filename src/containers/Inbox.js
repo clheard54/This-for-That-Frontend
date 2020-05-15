@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import UserContext from '../userContext'
+import UserContext from '../context/userContext'
 import { api } from '../services/api'
 
 class Inbox extends Component{

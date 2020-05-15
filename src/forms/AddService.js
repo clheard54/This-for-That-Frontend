@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import UserContext from '../userContext'
+import UserContext from '../context/userContext'
 
 const AddService = props => {
     const context = useContext(UserContext)

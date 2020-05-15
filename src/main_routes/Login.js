@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { api } from '../services/api'
-import UserContext from '../userContext'
+import UserContext from '../context/userContext'
 
 function Login (props) {
     const context = useContext(UserContext)

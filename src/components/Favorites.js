@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { api } from '../services/api'
-import UserContext from '../userContext'
+import UserContext from '../context/userContext'
 
 
 class Favorites extends Component{

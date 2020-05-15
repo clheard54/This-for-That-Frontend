@@ -1,8 +1,36 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
+import { CatalogProvider } from '../context/CatalogContext'
+import { api } from '../services/api'
 
 const Catalog = props => {
+    const [allItems, setAllItems] = useState([])
+    const [allServices, setAllServices] = useState([])
+
+    useEffect( ()=> {
+        api.getRequests.getItems().then(data => {
+            setAllItems(data)}
+        )
+        api.getRequests.getServices().then(data => {
+            setAllServices(data)}
+        )
+    }, [])
+
+
+    const addItem = () => {};
+    const removeItem = () => {};
+
+    const addService = () => {};
+    const removeService = () => {};
 
     return (
+        <CatalogProvider value={{
+            allItems: allItems,
+            allServices: allServices,
+            addItem: addItem,
+            removeItem: removeItem,
+            addService: addService,
+            removeService: removeService
+        }}>
         <Fragment>
             <br/>
             <div className='flex-row'>
@@ -17,6 +45,7 @@ const Catalog = props => {
                 </div>
             </div>
         </Fragment>
+        </CatalogProvider>
     )
 }
 

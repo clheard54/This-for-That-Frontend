@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from 'react'
-import UserConsumer from '../userContext';
+import UserConsumer from '../context/userContext';
 
 class NavBar extends React.Component {
 

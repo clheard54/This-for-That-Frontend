@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import './App.css';
 import { api } from './services/api'
-import { UserProvider } from './userContext';
+import { UserProvider } from './context/userContext';
 import NavBar from './main_routes/NavBar';
 import Login from './main_routes/Login';
 import LandingPage from './main_routes/LandingPage';
