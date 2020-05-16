@@ -12,7 +12,7 @@ class UserHome extends Component{
         </div>
         <div className="col" >
             <button onClick={()=>this.props.history.push('/catalog')}>Browse Catalog of Offerings</button><br/>
-            <button>Post an Offering</button>
+            <button onClick ={() => {this.props.history.push('/post')}}>Post an Offering</button>
         </div>
         <div className="col" id="favorites">
             <Favorites/>

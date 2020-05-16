@@ -77,6 +77,14 @@ const postItem = (newItem) => {
   }).then(res => res.json())
 }
 
+const postService = (newService) => {
+  return fetch(`${API_ROOT}/items`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify({service: newService})
+  }).then(res => res.json())
+}
+
 
 export const api = {
   auth: {
@@ -92,6 +100,7 @@ export const api = {
     getTags
   },
   posts: {
-    postItem
+    postItem,
+    postService
   }
 };

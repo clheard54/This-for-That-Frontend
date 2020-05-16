@@ -12,6 +12,7 @@ import Catalog from './containers/Catalog';
 import ItemsCatalog from './containers/ItemsCatalog';
 import ServicesCatalog from './containers/ServicesCatalog';
 import Inbox from './containers/Inbox';
+import AddOffering from './forms/AddOffering'
 
 class App extends React.Component {
   constructor() {
@@ -109,6 +110,11 @@ class App extends React.Component {
                 path='/services' 
                 render={props => <ServicesCatalog {...props}/>} /> 
 
+              <Route 
+                exact
+                path='/post' 
+                render={props => <AddOffering {...props}/>} /> 
+        
               <Route 
                 exact
                 path='/inbox' 

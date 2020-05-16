@@ -1,9 +1,10 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import UserContext, { UserConsumer } from '../context/userContext'
-import { CatalogProvider } from '../context/CatalogContext'
+import ImageUpload from './ImageUpload'
+import { CatalogConsumer } from '../context/CatalogContext'
 import { api } from '../services/api'
 
-const AddItem = props => {
+const AddOffering = props => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [location, setLocation] = useState('')
@@ -11,10 +12,10 @@ const AddItem = props => {
     const [seeking, setSeeking] = useState('')
     const [complete, setComplete] = useState(false)
     const [error, setError] = useState(false)
-
+    const [imageUpload, setImageUpload] = useState(false)
     const [checkboxes, setCheckboxes] = useState({})
 
-    setInitialState = (context) => {
+    const setInitialState = (context) => {
         context.tags.forEach(tag => {
             if (!checkboxes[tag]){
                 setCheckboxes({...checkboxes, 
@@ -25,6 +26,7 @@ const AddItem = props => {
     }
 
     const createCheckbox = (tag) => {
+      return (
         <div className="form-check">
           <label>
             <input
@@ -37,30 +39,43 @@ const AddItem = props => {
             {tag.name}
           </label>
         </div>
+      )
     }
 
-    handleCheckChange = e => {
+    const handleCheckChange = e => {
         const { name } = e.target;
         setCheckboxes({...checkboxes, [name]: !checkboxes[name]
       });
     }
 
-    handleSubmit = event => {
+    const toggleImageUpload = () => {
+      setImageUpload(!imageUpload)
+    }
+
+    const handleSubmit = event => {
       event.preventDefault();
-      let newItem = {
+      let newOffering = {
           title,
           description,
           location,
           value,
           seeking,
-          user_id: e.userId.value
+          user_id: event.userId.value
       }
-      api.posts.postItem(newItem).then(resp => {
+      event.target.options.value == "item" ? 
+      api.posts.postItem(newOffering).then(resp => {
           if (!resp.error){
               setComplete(true)
           } else {
               setError(resp.error)
           }
+      }) : 
+      api.posts.postService(newOffering).then(resp => {
+        if (!resp.error){
+            setComplete(true)
+        } else {
+            setError(resp.error)
+        }
       })
       Object.keys(checkboxes)
         .filter(checkbox => checkboxes[checkbox])
@@ -78,6 +93,13 @@ const AddItem = props => {
                 {complete ? <><h3>Success! Your offering has been posted.</h3><br/><button>Back to Catalog</button><button>Back to Profile</button></> : error ? <><h3>Uh-Oh something went wrong. Please try again...</h3>{error}</> : <><h3>What you Got?</h3>
                     <form onSubmit={handleSubmit}>
                         <label>What do you have to offer?</label>
+                        <div className="btn-group btn-group-toggle" data-toggle="buttons">
+                          <label className="btn btn-primary active">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked>Thing</input></label>
+                          <label className="btn btn-primary">
+                            <input type="radio" name="options" id="option2" autocomplete="off">Task</input></label>
+                        </div>
+                        <br/>
                         <input type='text' name='title' value={title}></input>
                         <br/>
 
@@ -101,7 +123,11 @@ const AddItem = props => {
                         <input type='text' name='seeking' value={seeking}></input>
                         <br/>
                         <br/>
+                        <button className='btn' onClick={toggleImageUpload}>Add Images?</button>
+                        <br/>
+                        {imageUpload ? <ImageUpload {...props}/> : null}
                         <input type='hidden' name='userID' value={userContext.current_user.id}></input>
+
                         <input type="submit" value="Post it!"></input>
                     </form></> }
                   </Fragment>
@@ -111,4 +137,6 @@ const AddItem = props => {
     )
 }
 
-export default AddItem;
+export default AddOffering;
+
+
