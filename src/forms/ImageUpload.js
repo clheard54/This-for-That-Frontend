@@ -3,36 +3,22 @@ import AddOffering from './AddOffering'
 
 class ImageUpload extends React.Component{
   state = {
-    selectedImageFiles: [],
-    submitFormProgress: 0,
-    isSubmittingForm: false,
-    didFormSubmissionComplete: false,
-    item: {
-        id: this.props.match.params.id,
-        title: '',
-        description: '',
-        location: '',
-        value: '',
-        seeking: '',
-        errors: {}
-      }
+    selectedImageFiles: []
     };
 
-    getNumberOfSelectedFiles() {
+    getNumberOfSelectedFiles = () => {
         return this.state.selectedImageFiles.filter(el => {
           return el._destroy !== true;
         }).length;
       }
       
-    renderUploadImagesButton() {
-    let numberOfSelectedImages = this.getNumberOfSelectedFiles();
+    renderUploadImagesButton = () => {
     return (
         <div>
         <input
             name="images[]"
             ref={field => (this.itemImagesField = field)}
             type="file"
-            disabled={this.state.isSubmittingForm}
             multiple={true}
             accept="image/*"
             style={{
@@ -48,17 +34,12 @@ class ImageUpload extends React.Component{
             className="form-control"
         />
         <label
-            disabled={this.state.isSubmittingForm}
-            className="btn btn-success"
+            className="btn btn-primary"
             htmlFor="item_images">
             <span className="glyphicon glyphicon-cloud-upload" />
-            &nbsp; &nbsp;
-            {numberOfSelectedImages === 0
-            ? 'Upload Files'
-            : `${numberOfSelectedImages} file${numberOfSelectedImages !== 1
-                ? 's'
-                : ''} selected`}
-        </label>
+            Upload Images
+        </label><br/>
+        <small className='text-muted'><i>(Recommended)</i></small>
         </div>
     );
     }
@@ -113,151 +94,52 @@ class ImageUpload extends React.Component{
           </ul>
         );
       }
-      
-      handleFormSubmit() {
-        let { item } = this.state;
-        item.errors = {};
-        this.setState(
-          {
-            isSubmittingForm: true,
-            item: item
-          },
-          () => {
-            this.submitForm();
-          }
-        );
-      }
-      
-      buildFormData() {
-        let formData = new FormData();
-        formData.append('item[title]', this.state.item.title);
-        formData.append('item[description]', this.state.item.description);
-        formData.append('item[location]', this.state.item.location);
-        formData.append('item[value]', this.state.item.value);
-        formData.append('item[seeking]', this.state.item.seeking);
-      
+
+      removeSelectedImageFile(image, index) {
         let { selectedImageFiles } = this.state;
-        for (let i = 0; i < selectedImageFiles.length; i++) {
-          let file = selectedImageFiles[i];
-          if (file.id) {
-            if (file._destroy) {
-              formData.append(`item[images_attributes][${i}][id]`, file.id);
-              formData.append(`item[images_attributes][${i}][_destroy]`, '1');
-            }
-          } else {
-            formData.append(
-              `item[images_attributes][${i}][photo]`,
-              file,
-              file.name
-            );
-          }
+        if (image.id) { // cover file that has been uploaded will be marked as destroy
+          selectedImageFiles[index]._destroy = true;
+        } else {
+          selectedImageFiles.splice(index, 1);
         }
-        return formData;
+      
+        this.setState({
+          selectedImageFiles: selectedImageFiles
+        });
       }
       
-      // submitForm() {
-      //   let submitMethod = this.state.item.id ? 'patch' : 'post';
-      //   let url = this.state.item.id
-      //     ? `/items/${this.state.item.id}.json`
-      //     : '/items.json';
-      
-      //   axiosClient
-      //     [submitMethod](url, this.buildFormData(), {
-      //       onUploadProgress: progressEvent => {
-      //         let percentage = progressEvent.loaded * 100.0 / progressEvent.total;
-      //         this.setState({
-      //           submitFormProgress: percentage
-      //         });
-      //       }
-      //     })
-      //     .then(response => {
-      //       this.setState({
-      //         didFormSubmissionComplete: true
-      //       });
-      //       this.props.history.push('/items');
-      //     })
-      //     .catch(error => {
-      //       let { item } = this.state;
-      //       item.errors = error.response.data;
-      //       this.setState({
-      //         isSubmittingForm: false,
-      //         submitFormProgress: 0,
-      //         item: item
-      //       });
-      //     });
-      // }
+      handleFormSubmit = () => {
+          this.props.addImages(this.state.selectedImageFiles)
+      }
 
     render() {
+      const numberOfSelectedImages = this.getNumberOfSelectedFiles();
         return (
           <div className="ItemForm">
             <form>
-      
               <div className="form-group">
-                <label>Title</label>
-                <input
-                  type="text"
-                  onChange={e => this.handleTitleChange(e)}
-                  value={this.state.item.title}
-                />
-              </div>
-      
-              <div className="form-group">
-                <label>Description</label>
-                <textarea
-                  type="text"
-                  onChange={e => this.handleDescriptionChange(e)}
-                  value={this.state.item.description}
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Location</label>
-                <textarea
-                  type="text"
-                  onChange={e => this.handleLocationChange(e)}
-                  value={this.state.item.location}
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Value</label>
-                <textarea
-                  type="text"
-                  onChange={e => this.handleValueChange(e)}
-                  value={this.state.item.value}
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Seeking</label>
-                <textarea
-                  type="text"
-                  onChange={e => this.handleSeekingChange(e)}
-                  value={this.state.item.seeking}
-                />
-              </div>
-      
-              <div className="form-group">
-                <label>Images</label>
-                {this.renderUploadImagessButton()}
+                {/* <label>Images</label> */}
+                {this.renderUploadImagesButton()}
                 {this.renderSelectedImageFiles()}
               </div>
-      
-              {this.renderUploadFormProgress()}
-      
-              <button
-                disabled={this.state.isSubmittingForm}
+            
+            <div>
+            {numberOfSelectedImages == 0 ? null :
+              <><button
                 onClick={e => this.handleFormSubmit()}
                 className="btn btn-primary">
-                {this.state.isSubmittingForm ? 'Saving...' : 'Save'}
+                 Add {numberOfSelectedImages} file{numberOfSelectedImages !== 1
+                ? 's'
+                : ''}
               </button>
-              &nbsp;
               <button
-                disabled={this.state.isSubmittingForm}
                 onClick={e => this.handleCancel()}
                 className="btn btn-default">
                 Cancel
-              </button>
+              </button></>}
+              </div>
+              
+              
       
             </form>
             <br />

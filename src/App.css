@@ -338,41 +338,42 @@ card-body {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.btn-primary {
+
+.btn-aqua {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color:rgb(66, 230, 134);;
+  border-color: rgb(66, 230, 134);
 }
 
-.btn-primary:hover {
+.btn-aqua:hover {
   color: #fff;
-  background-color: #0069d9;
-  border-color: #0062cc;
+  background-color: rgb(42, 212, 147);
+  border-color: rgb(42, 212, 147);
 }
 
-.btn-primary:focus, .btn-primary.focus {
+.btn-aqua:focus, .btn-aqua.focus {
   color: #fff;
-  background-color: #0069d9;
-  border-color: #0062cc;
-  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+  background-color: rgb(42, 212, 147);
+  border-color: rgb(42, 212, 147);
+  box-shadow: 0 0 0 0.2rem rgba(68, 209, 127, 0.753)
 }
 
-.btn-primary.disabled, .btn-primary:disabled {
+.btn-aqua.disabled, .btn-aqua:disabled {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: rgb(10, 231, 147);
+  border-color: rgb(10, 231, 147);
 }
 
-.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
-.show > .btn-primary.dropdown-toggle {
+.btn-aqua:not(:disabled):not(.disabled):active, .btn-aqua:not(:disabled):not(.disabled).active,
+.show > .btn-aqua.dropdown-toggle {
   color: #fff;
-  background-color: #0062cc;
-  border-color: #005cbf;
+  background-color: rgb(42, 212, 147);
+  border-color: #24ac61;
 }
 
-.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
-.show > .btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+.btn-aqua:not(:disabled):not(.disabled):active:focus, .btn-aqua:not(:disabled):not(.disabled).active:focus,
+.show > .btn-aqua.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(68, 209, 127, 0.753);
 }
 
 .btn-group,
@@ -413,4 +414,41 @@ card-body {
   position: absolute;
   clip: rect(0, 0, 0, 0);
   pointer-events: none;
+}
+
+.checklist {
+  column-count: 3;
+  width: 60%;
+  margin: auto
+}
+
+.btn-submit {
+  border: 1px solid rgb(245, 88, 232);
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+#post-btn {
+  position: relative;
+  left: 25%;
+  width: 16vw;
+  background-color: rgb(245, 88, 232);
+  color: white
+}
+
+#post-back {
+  position: relative;
+  right: 25%;
+  border:2px solid  rgb(245, 88, 232);
+  color: rgb(245, 88, 232);
 }

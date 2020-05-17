@@ -12,8 +12,8 @@ class NavBar extends React.Component {
         return (
             <UserConsumer>
               {context => (
-                <div id="SideNav" class="sidenav">
-                    <a href="javascript:void(0)" class="closebtn" onClick={this.closeNav}>&times;</a>
+                <div id="SideNav" className="sidenav">
+                    <a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>&times;</a>
                     <a href="/profile">My Profile</a>
                     <a href="/add_post">Post an Offering</a>
                     <a href="/catolog">Browse Items</a>

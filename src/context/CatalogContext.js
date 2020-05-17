@@ -5,7 +5,9 @@ import React from 'react';
 
 const CatalogContext = React.createContext({
     items: [],
-    services: []
+    services: [],
+    itemTags: ["antiques", "appliances", "arts+crafts", "cars/trucks/motorcycles", "beauty+health", "bikes", "books", "clothes+accessories", "electronics", "farm+garden", "furniture", "kids+babies", "materials", "music", "sports+equipment", "tech", "tickets", "tools", "toys+games" ],
+    taskTags: ["babysitting", "beauty+health", "caretaking", "cleaning", "cooking", "creative", "driving", "education", "finances", "fitness", "legal services", "medical services", "miscellaneous", "pets+pet care", "physical labor+moving", "real estate", "skilled trade: plumbing, electric, automotive", "tech services", "yardwork: farm+garden"]
 });
 
 const CatalogProvider = CatalogContext.Provider;
