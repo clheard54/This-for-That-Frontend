@@ -452,3 +452,15 @@ card-body {
   border:2px solid  rgb(245, 88, 232);
   color: rgb(245, 88, 232);
 }
+
+.row-filter {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: 50px;
+    font-size: 1rem;
+    align-items: center;
+    font-weight: 1.3
+}

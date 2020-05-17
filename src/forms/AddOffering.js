@@ -154,6 +154,7 @@ const AddOffering = props => {
                         <input type='text' name='seeking' value={seeking} onChange={e => setSeeking(e.target.value)}></input>
                         <br/>
                         <br/>
+                      
                         <ImageUpload {...props} addImages={addImages} />
 
                         <input type='hidden' name='userID' value={userContext.current_user.id}></input>

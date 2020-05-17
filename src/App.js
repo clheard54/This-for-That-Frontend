@@ -10,6 +10,7 @@ import Signup from './main_routes/Signup';
 import UserHome from './containers/UserHome';
 import Catalog from './containers/Catalog';
 import ItemsCatalog from './containers/ItemsCatalog';
+import ItemsFiltered from './containers/ItemsFiltered';
 import ServicesCatalog from './containers/ServicesCatalog';
 import Inbox from './containers/Inbox';
 import AddOffering from './forms/AddOffering'
@@ -103,7 +104,7 @@ class App extends React.Component {
               <Route 
                 exact
                 path='/items/:tag' 
-                render={props => <ItemsCatalog {...props}/>} />
+                render={props => <ItemsFiltered {...props}/>} />
 
               <Route 
                 exact

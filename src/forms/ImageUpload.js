@@ -1,5 +1,6 @@
 import React from 'react'
 import AddOffering from './AddOffering'
+import ImageDropzone from './Dropzone'
 
 class ImageUpload extends React.Component{
   state = {
@@ -39,7 +40,7 @@ class ImageUpload extends React.Component{
             <span className="glyphicon glyphicon-cloud-upload" />
             Upload Images
         </label><br/>
-        <small className='text-muted'><i>(Recommended)</i></small>
+        <small className='text-muted'><i>...or</i></small>
         </div>
     );
     }
@@ -122,7 +123,7 @@ class ImageUpload extends React.Component{
                 {this.renderUploadImagesButton()}
                 {this.renderSelectedImageFiles()}
               </div>
-            
+            <ImageDropzone />
             <div>
             {numberOfSelectedImages == 0 ? null :
               <><button

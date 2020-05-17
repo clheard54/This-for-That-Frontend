@@ -7,7 +7,7 @@ const ItemsFiltered = props => {
     
     useEffect(getItems, [])
 
-    getItems = () => {
+    const getItems = () => {
     const tag = this.props.match.params.tag;
     for (let item of context.items) {
         if (item.tags.includes(tag)) {
@@ -19,11 +19,11 @@ const ItemsFiltered = props => {
 
     return (   
         <>
-        <img className="card-img-top" src={image} />
+        {/* <img className="card-img-top" src={image} />
         <div classNamer="card-body">
             <h3>{style}</h3>
             <h4>{maker}</h4>
-        </div>
+        </div> */}
         <button onClick={() => this.props.history.push('/items')}>Back to All the Things</button>
         </>
     );
