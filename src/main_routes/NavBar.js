@@ -16,7 +16,7 @@ class NavBar extends React.Component {
                     <a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>&times;</a>
                     <a href="/profile">My Profile</a>
                     <a href="/add_post">Post an Offering</a>
-                    <a href="/catolog">Browse Items</a>
+                    <a href="/catalog">Browse Items</a>
                     <a href="/inbox">Inbox</a>
                     <a href="/logout" onClick={context.userLogout}>Logout</a>
                 </div>

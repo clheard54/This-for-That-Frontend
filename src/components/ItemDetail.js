@@ -1,8 +1,11 @@
-import React, { useContext, useEffect } from "react";
-import CatalogContext from '../context/CatalogContext'
+import React, { useContext, useEffect, useState } from "react";
+import {CatalogContext} from '../context/CatalogContext'
+import WriteMessage from '../forms/WriteMessage'
 
-const Detail = props => {
+const ItemDetail = props => {
     const context = useContext(CatalogContext)
+    const {type} = props
+    const [msg, setMsg] = useState(false)
     const thisItem = {
         title: '',
         description: '',
@@ -26,13 +29,18 @@ const Detail = props => {
             <small>Estimated Value: {thisItem.value}</small><br/>
             <p><b>Seeking:</b> {thisItem.seeking} </p>
         </div>
+        <br/><br/>
+        <span>Interested in learning more or making an offer?</span>
+        <button className='btn btn-primary' onClick={()=>setMsg(true)}>Write Message</button>
+            {!!msg ? <WriteMessage type='item' offering={thisItem}/> : null}
+
         <button onClick={() => this.props.history.push('/items')}>Back to All Items</button>
         </>
         <>
-        <img src={image}></img>
+        {/* <img src={}></img> */}
         </>
     </div>
     );
 }
 
-export default Detail
+export default ItemDetail

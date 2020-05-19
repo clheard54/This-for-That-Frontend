@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import './App.css';
 import { api } from './services/api'
 import { UserProvider } from './context/userContext';
+import CatalogProvider from './context/CatalogContext';
 import NavBar from './main_routes/NavBar';
 import Login from './main_routes/Login';
 import LandingPage from './main_routes/LandingPage';
@@ -10,7 +11,8 @@ import Signup from './main_routes/Signup';
 import UserHome from './containers/UserHome';
 import Catalog from './containers/Catalog';
 import ItemsCatalog from './containers/ItemsCatalog';
-import ItemsFiltered from './containers/ItemsFiltered';
+import ItemDetail from './components/ItemDetail';
+import ServiceDetail from './components/ServiceDetail';
 import ServicesCatalog from './containers/ServicesCatalog';
 import Inbox from './containers/Inbox';
 import AddOffering from './forms/AddOffering'
@@ -19,8 +21,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-        current_user: {}
-    };
+        current_user: {},
+    }
   }
 
   componentDidMount() {
@@ -62,6 +64,7 @@ class App extends React.Component {
           userLogin: this.userLogin,
           userLogout: this.userLogout
           }}>
+          <CatalogProvider>
         <Router>
           <header>
             <NavBar />
@@ -94,7 +97,7 @@ class App extends React.Component {
               <Route 
                 exact
                 path='/catalog' 
-                render={props => <Catalog {...props}/>} /> 
+                render={props => <Catalog {...props} populateContext={this.populateContext}/>} /> 
 
               <Route 
                 exact
@@ -103,13 +106,18 @@ class App extends React.Component {
 
               <Route 
                 exact
-                path='/items/:tag' 
-                render={props => <ItemsFiltered {...props}/>} />
+                path='/items/:id' 
+                render={props => <ItemDetail {...props}/>} />
 
               <Route 
                 exact
                 path='/services' 
                 render={props => <ServicesCatalog {...props}/>} /> 
+
+              <Route 
+                exact
+                path='/services/:id' 
+                render={props => <ServiceDetail {...props}/>} />
 
               <Route 
                 exact
@@ -125,6 +133,7 @@ class App extends React.Component {
             </div>
           </div>
         </Router>
+        </CatalogProvider>
       </UserProvider>
   </div>
     );

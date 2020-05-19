@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { api } from '../services/api'
 
 // this is the equivalent to the createStore method of Redux

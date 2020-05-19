@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { api } from '../services/api'
 import UserContext from '../context/userContext'
-import Item from './Item'
+import ItemCard from './ItemCard'
 
 class Favorites extends Component{
     static contextType = UserContext;
@@ -20,7 +20,7 @@ class Favorites extends Component{
 
     renderFavorites = () => {
         return this.state.favorites.map(fave => {
-            return <Item item={fave}></Item>
+            return <ItemCard item={fave} />
         })
     }
     

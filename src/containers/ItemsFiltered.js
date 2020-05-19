@@ -5,7 +5,7 @@ const ItemsFiltered = props => {
     const context = useContext(CatalogContext)
     const [filtered, setFiltered] = useState([])
     
-    useEffect(getItems, [])
+    useEffect(() => getItems, [])
 
     const getItems = () => {
     const tag = this.props.match.params.tag;

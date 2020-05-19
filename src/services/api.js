@@ -85,6 +85,23 @@ const postService = (newService) => {
   }).then(res => res.json())
 }
 
+const postMessage = (newMessage) => {
+  return fetch(`${API_ROOT}/messages`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify(newMessage)
+  }).then(res => res.json())
+}
+
+const findOwner = (item) => {
+  fetch(`${API_ROOT}/users`, {
+    headers: headers()
+    }).then(res => res.json())
+    .then(data => {
+      return data.find(item.user_id)
+    })
+}
+
 
 export const api = {
   auth: {
@@ -97,10 +114,12 @@ export const api = {
     getMessages,
     getItems,
     getServices,
-    getTags
+    getTags,
+    findOwner
   },
   posts: {
     postItem,
-    postService
+    postService,
+    postMessage
   }
 };

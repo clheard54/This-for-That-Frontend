@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import CatalogContext from '../context/CatalogContext'
+import {CatalogContext} from '../context/CatalogContext'
 
 const ServicesCatalog = props => {
     const context = useContext(CatalogContext)

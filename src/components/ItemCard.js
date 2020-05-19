@@ -1,11 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import UserContext from '../context/userContext'
 import {Link} from 'react-router-dom'
+import WriteMessage from '../forms/WriteMessage'
  
 
-const Item = props => {
+const ItemCard = props => {
     const context = useContext(UserContext)
     const {item} = props
+
+    const viewDetails = () => {
+        props.history.push(`/items/${item.id}`)
+    }
 
     return (
         <div className="col col-md-3">
@@ -25,10 +30,12 @@ const Item = props => {
             </div>
             </div>
         </div>
+        <br/><br/>
+        <button className='btn btn-primary' onClick={()=> viewDetails}>See Details</button>
         </div>
     )
 }
 
-export default Item;
+export default ItemCard;
 
 
