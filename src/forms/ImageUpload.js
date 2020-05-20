@@ -23,12 +23,12 @@ class ImageUpload extends React.Component{
             multiple={true}
             accept="image/*"
             style={{
-            width: 0.1,
-            height: 0.1,
-            opacity: 0,
-            overflow: 'hidden',
-            position: 'absolute',
-            zIndex: -1
+              width: 0.1,
+              height: 0.1,
+              opacity: 0,
+              overflow: 'hidden',
+              position: 'absolute',
+              zIndex: -1
             }}
             id="item_images"
             onChange={e => this.handleImagesChange(e)}
@@ -107,6 +107,10 @@ class ImageUpload extends React.Component{
         this.setState({
           selectedImageFiles: selectedImageFiles
         });
+      }
+
+      addDropped = (files) => {
+        
       }
       
       handleFormSubmit = () => {

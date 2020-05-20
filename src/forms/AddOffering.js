@@ -13,7 +13,7 @@ const AddOffering = props => {
     const [seeking, setSeeking] = useState('')
     const [complete, setComplete] = useState(false)
     const [error, setError] = useState(false)
-    const [photos, setPhotos] = useState([])
+    const [images, setImages] = useState([])
     const [checkboxes, setCheckboxes] = useState({})
 
     const setInitialState = (context) => {
@@ -58,7 +58,7 @@ const AddOffering = props => {
     }
 
     const addImages = (selectedImageFiles) => {
-      setPhotos(selectedImageFiles)
+      setImages(selectedImageFiles)
     }
 
     const buildFormData = () => {
@@ -69,8 +69,8 @@ const AddOffering = props => {
       formData.append('item[value]', value);
       formData.append('item[seeking]', seeking);
     
-      for (let i = 0; i < photos.length; i++) {
-        let file = photos[i];
+      for (let i = 0; i < images.length; i++) {
+        let file = images[i];
         if (file.id) {
           if (file._destroy) {
             formData.append(`item[images_attributes][${i}][id]`, file.id);
@@ -78,7 +78,7 @@ const AddOffering = props => {
           }
         } else {
           formData.append(
-            `item[images_attributes][${i}][photo]`,
+            `item[images_attributes][${i}][file]`,
             file,
             file.name
           );

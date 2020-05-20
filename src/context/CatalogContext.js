@@ -14,30 +14,29 @@ class CatalogProvider extends React.Component{
         messages: [],
         itemTags: ["antiques", "appliances", "arts+crafts", "cars/trucks/motorcycles", "beauty+health", "bikes", "books", "clothes+accessories", "electronics", "farm+garden", "furniture", "kids+babies", "materials", "music", "sports+equipment", "tech", "tickets", "tools", "toys+games" ],
         taskTags: ["babysitting", "beauty+health", "caretaking", "cleaning", "cooking", "creative", "driving", "education", "finances", "fitness", "legal services", "medical services", "miscellaneous", "pets+pet care", "physical labor+moving", "real estate", "skilled trade: plumbing, electric, automotive", "tech services", "yardwork: farm+garden"],
-        populateContext: this.populateContext
+        populateContext: this.populateContext,
     }
 
       populateContext = () => {
         api.getRequests.getItems().then(data => {
           this.setState({
-            items: data
+            items: data,
           })
         });
         api.getRequests.getServices().then(data => {
           this.setState({
-            services: data
+            services: data,
           })
         });
         api.getRequests.getTags().then(data => {
           this.setState({
-            tags: data
+            tags: data,
           })
-        })
+        });
       }
 
       componentDidMount() {
         this.populateContext()
-        console.log('populating')
       }
 
       render() {

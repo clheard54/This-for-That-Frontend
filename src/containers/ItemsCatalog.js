@@ -12,7 +12,7 @@ const ItemsCatalog = props => {
     const [filters, setFilters] = useState([])
 
     useEffect(() => {
-        if (!items){
+        if (items.length == 0){
             populateContext()
         };
         if (!!props.location.filter){
@@ -22,10 +22,13 @@ const ItemsCatalog = props => {
 
 
     const renderItems = () => {
-        console.log(items)
+        if (filters.length == 0) {
         return items.map(item => {
             return <ItemCard {...props} item={item} onClick={() => goToDetail()}/>
-        })
+            })
+        } else {
+            renderFiltered()
+        }
     }
 
     const goToDetail = (e) => {
@@ -70,8 +73,10 @@ const ItemsCatalog = props => {
             <div className='row-filter'>
             Filter by Category:&ensp;
             <Select styles={colorStyles} id='dropdown' isMulti options={showItemsTags()} values={filters} onChange={(values) => setFilters([...filters, values])} /></div>
-            <div className='row'> 
-            {filters == [] ? renderItems() : renderFiltered()}
+            <br/><br/>
+            <div className='card-row'> 
+            {/* {filters == [] ? renderItems() : renderFiltered()} */}
+            {renderItems()}
             </div>
         </div>
            

@@ -1,46 +1,42 @@
 import React, { useContext, useEffect, useState } from "react";
 import {CatalogContext} from '../context/CatalogContext'
 import WriteMessage from '../forms/WriteMessage'
+import LoaderHOC_ from '../HOCs/LoaderHOC'
 
 const ItemDetail = props => {
-    const context = useContext(CatalogContext)
-    const {type} = props
+    const item = props.location.state
     const [msg, setMsg] = useState(false)
-    const thisItem = {
-        title: '',
-        description: '',
-        location: '',
-        value: '',
-        seeking: ''
-    }
 
-    useEffect(() => {
-        const id = this.props.match.params.id;
-        thisItem = context.items.find(id)
-    }, [])
+
+     const renderDetail = () => {
+        return (
+          <>
+          <br/>
+          <h2>Offering: {item.title}</h2>
+            <div>
+                <p style={{'fontSize': 'large'}}>{item.description}</p><br/>
+                {/* IMAGES: <img src={}></img> */}
+            <p><b>Seeking:</b> {item.seeking} </p>
+                <small>Location: {item.location}</small><br/>
+                <small>Estimated Value: {item.value}</small><br/><br/>
+            </div>
+            <br/>
+            <span>Interested in learning more or making an offer?</span><br/><br/>
+            <button className='btn btn-primary' onClick={()=>setMsg(true)}>Write Message</button>
+                {!!msg ? <WriteMessage type='item' offering={item}/> : null}
+
+            </> )
+        }
     
-  return (
-    <div className='flex-row'>
+    return (
         <>
-      <h3>{thisItem.name}</h3>
-        <div classNamer="card-body">
-            <h5>{thisItem.description}</h5>
-            <small>Location: {thisItem.location}</small>
-            <small>Estimated Value: {thisItem.value}</small><br/>
-            <p><b>Seeking:</b> {thisItem.seeking} </p>
-        </div>
-        <br/><br/>
-        <span>Interested in learning more or making an offer?</span>
-        <button className='btn btn-primary' onClick={()=>setMsg(true)}>Write Message</button>
-            {!!msg ? <WriteMessage type='item' offering={thisItem}/> : null}
-
-        <button onClick={() => this.props.history.push('/items')}>Back to All Items</button>
+          <div id='detail'>
+            {renderDetail()}
+          </div>
+          <br/><br/>
+          <button id='detail-back' onClick={() => this.props.history.push('/items')}>Back to All Items</button>
         </>
-        <>
-        {/* <img src={}></img> */}
-        </>
-    </div>
-    );
+    )
 }
 
-export default ItemDetail
+export default LoaderHOC_(ItemDetail)

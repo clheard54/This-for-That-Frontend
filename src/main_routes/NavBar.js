@@ -5,7 +5,7 @@ class NavBar extends React.Component {
 
     closeNav = () => {
         document.getElementById("SideNav").style.width = "0";
-        document.querySelector(".main").style.marginLeft = "20px";
+        document.querySelector(".main").style.marginLeft = "10px";
       }
 
     render(){

@@ -53,7 +53,7 @@ class App extends React.Component {
 
   openNav = () =>  {
     document.getElementById("SideNav").style.width = "250px";
-    document.querySelector(".main").style.marginLeft = "270px";
+    document.querySelector(".main").style.marginLeft = "250px";
   }
 
   render() {

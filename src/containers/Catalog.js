@@ -1,6 +1,5 @@
-import React, { Fragment, useState, useEffect, useContext } from 'react'
+import React, { Fragment, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { api } from '../services/api'
 import { CatalogContext } from '../context/CatalogContext'
 
 const Catalog = props => {

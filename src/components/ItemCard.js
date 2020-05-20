@@ -7,31 +7,34 @@ import WriteMessage from '../forms/WriteMessage'
 const ItemCard = props => {
     const context = useContext(UserContext)
     const {item} = props
+    const postedDate = new Date(item.created_at).toString().split(' ').slice(1, 3).join(' ')
 
     const viewDetails = () => {
         props.history.push(`/items/${item.id}`)
     }
 
     return (
-        <div className="col col-md-3">
+        <div className="col-md-6">
         <div className="card">
-            {/*image somewhere*/}
             <div className="card-body">
-            <div className='column'>
-                <h4 className="card-title">{item.name}</h4>
-                    <p className="card-text">{item.description}.<br/>
-                    Location: {item.location}<br/>
-                    Estimated Value: {item.value}</p>
-                    <Link to={`/items/${item.id}`}><button>Detail</button></Link>
-                    <p className="card-text"><small className="text-muted">Posted {item.created_at}</small></p>
+            <div className={!!item.images ? 'col-md-7' : 'col-md-11'}>
+                <h4 className="card-title">{item.title}</h4>
+                    <p className="card-text">{item.description}.<br/><br/>
+                    <b>Ideal Swap:</b> {item.seeking}</p>
+                    <Link to={{pathname: `/items/${item.id}`,
+                        state: item}}><button className='btn-pink' onClick={()=> viewDetails}>See Details</button></Link>
+                    <p className="card-text"><small className="text-muted">Posted {postedDate}</small></p>
             </div>
-            <div className='column'>
-                <img className="card-img-right" src="..." alt="Photo1 {item.name}"></img>
-            </div>
+            {!!item.images ?
+            <div className= 'col-md-4'>
+                <br/><br/>
+                <p><img src={!!item.images[0] ? `${item.images[0].url}` : "https://cultmtl.com/wp-content/uploads/2016/07/barter.jpg"} width="160" alt={`${item.title} - photo1`}/></p>
+                    <br/>
+                Location: {item.location}<br/>
+            </div> : null}
             </div>
         </div>
         <br/><br/>
-        <button className='btn btn-primary' onClick={()=> viewDetails}>See Details</button>
         </div>
     )
 }
