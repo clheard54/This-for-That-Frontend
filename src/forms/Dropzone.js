@@ -2,14 +2,14 @@ import React, { PureComponent } from 'react';
 import DropzoneComponent from 'react-dropzone-component';
 
 const djsConfig = {
-  acceptedFiles: "image/jpeg,image/png,image/gif",
+  acceptedFiles: "image/jpeg,image/png,image/gif, image/jpg",
   autoProcessQueue: false,
   uploadMultiple: true,
   addRemoveLinks: true
 }
 
 const componentConfig = {
-  iconFiletypes: ['.jpg', '.png', '.gif'],
+  iconFiletypes: ['.jpg', '.png', '.gif', '.jpeg'],
   showFiletypeIcon: false,
   maxFiles: 10,
   postUrl: 'no-url'
@@ -49,7 +49,7 @@ export default class ImageDropzone extends PureComponent {
           return {
           addedImages: [...prev.addedImages, img]
           }
-      })
+      }, ()=> this.props.addImages(this.state.addedImages))
   }
 
   removeImage = (img) => {
@@ -75,11 +75,16 @@ export default class ImageDropzone extends PureComponent {
     }
 
     return (
-      <DropzoneComponent
-        config={componentConfig}
-        eventHandlers={eventHandlers}
-        djsConfig={djsConfig}
-      />
+      <>
+       <span style={{'lineHeight': '200%'}}>Got Photos?</span>
+        <br/>
+        <DropzoneComponent
+          config={componentConfig}
+          eventHandlers={eventHandlers}
+          djsConfig={djsConfig}
+        />
+        <br/>
+      </>
     );
   }
 }

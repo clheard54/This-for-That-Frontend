@@ -1,6 +1,6 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useState, useRef } from 'react'
 import UserContext, { UserConsumer } from '../context/userContext'
-import ImageUpload from './ImageUpload'
+import ImageDropzone from './Dropzone'
 import { CatalogConsumer } from '../context/CatalogContext'
 import { api } from '../services/api'
 
@@ -15,6 +15,8 @@ const AddOffering = props => {
     const [error, setError] = useState(false)
     const [images, setImages] = useState([])
     const [checkboxes, setCheckboxes] = useState({})
+
+    let itemImagesField = useRef(null);
 
     const setInitialState = (context) => {
         context.tags.forEach(tag => {
@@ -57,8 +59,8 @@ const AddOffering = props => {
       });
     }
 
-    const addImages = (selectedImageFiles) => {
-      setImages(selectedImageFiles)
+    const addImages = (photos) => {
+      setImages([...images, ...photos])
     }
 
     const buildFormData = () => {
@@ -88,17 +90,26 @@ const AddOffering = props => {
 
     }
 
+    // const handleImagesChange = () => {
+    //   let selectedFiles = itemImagesField.current.files;
+    //     for (let i = 0; i < selectedFiles.length; i++) {
+    //       setImages([...images, selectedFiles[i]]);
+    //     } 
+    //   }
+
     const handleSubmit = event => {
       event.preventDefault();
-      let newOffering = buildFormData()
-      event.target.options.value == "item" ? 
+      const newOffering = new FormData(event.target)
+      type == "item" ? 
       api.posts.postItem(newOffering).then(resp => {
           if (!resp.error){
               setComplete(true)
+              // .then(data => props.setPost(data.post))
           } else {
               setError(resp.error)
           }
-      }) : 
+        })
+        : 
       api.posts.postService(newOffering).then(resp => {
         if (!resp.error){
             setComplete(true)
@@ -152,13 +163,26 @@ const AddOffering = props => {
 
                         <label>Seeking anything in particular in exchange?&emsp;</label>
                         <input type='text' name='seeking' value={seeking} onChange={e => setSeeking(e.target.value)}></input>
-                        <br/>
-                        <br/>
-                      
-                        <ImageUpload {...props} addImages={addImages} />
+                        <br/><br/>
+
+                      {/* <span style={{'position': 'relative', left: '10%'}}>Got Photos?&ensp;</span>
+                        <label
+                            className="btn btn-primary"
+                            htmlFor="item_images"
+                            style={{'position': 'relative', 'top':'2%', left: '10%'}}>
+                            Upload Images
+                        </label>
+                        <span id="file-selected"></span> 
+                        <input type="file" name="images" style={{ 'opacity': '0'}} accept="image/*" onChange={e => setImages([...images, e.target.value])}/> */}
+
+                        {/* <br/><small>...or</small><br/><br/> */}
+                        <div className='drop-border'>
+                        <ImageDropzone {...props} addImages={addImages} />
+                        </div>
 
                         <input type='hidden' name='userID' value={userContext.current_user.id}></input>
-                        
+                        <br/><br/>
+
                         <button id='post-back' className='btn btn-submit' onClick={()=> props.history.push('/profile')} >Go Back</button>
                         <input id='post-btn' className='btn btn-submit' type="submit" value="Post it!"></input>
                     </form></> }

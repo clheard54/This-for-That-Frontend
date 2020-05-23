@@ -12,6 +12,7 @@ const ItemDetail = props => {
         return (
           <>
           <br/>
+          <div id='star-five'></div>
           <h2>Offering: {item.title}</h2>
             <div>
                 <p style={{'fontSize': 'large'}}>{item.description}</p><br/>

@@ -69,19 +69,26 @@ const getTags = () => {
   }).then(res => res.json())
 };
 
-const postItem = (newItem) => {
+const postItem = (formData) => {
   return fetch(`${API_ROOT}/items`, {
     method: 'POST',
-    headers: headers(),
-    body: JSON.stringify({item: newItem})
+    headers: {
+      Accept: "application/json",
+      Authorization: userToken()
+    },
+    body: formData
   }).then(res => res.json())
 }
 
+
 const postService = (newService) => {
-  return fetch(`${API_ROOT}/items`, {
+  return fetch(`${API_ROOT}/services`, {
     method: 'POST',
-    headers: headers(),
-    body: JSON.stringify({service: newService})
+    headers: {
+      Accept: "application/json",
+      Authorization: userToken()
+    },
+    body: newService
   }).then(res => res.json())
 }
 

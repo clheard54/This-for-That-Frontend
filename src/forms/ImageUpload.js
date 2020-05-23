@@ -7,54 +7,16 @@ class ImageUpload extends React.Component{
     selectedImageFiles: []
     };
 
-    getNumberOfSelectedFiles = () => {
-        return this.state.selectedImageFiles.filter(el => {
-          return el._destroy !== true;
-        }).length;
-      }
       
-    renderUploadImagesButton = () => {
-    return (
-        <div>
-        <input
-            name="images[]"
-            ref={field => (this.itemImagesField = field)}
-            type="file"
-            multiple={true}
-            accept="image/*"
-            style={{
-              width: 0.1,
-              height: 0.1,
-              opacity: 0,
-              overflow: 'hidden',
-              position: 'absolute',
-              zIndex: -1
-            }}
-            id="item_images"
-            onChange={e => this.handleImagesChange(e)}
-            className="form-control"
-        />
-        <label
-            className="btn btn-primary"
-            htmlFor="item_images">
-            <span className="glyphicon glyphicon-cloud-upload" />
-            Upload Images
-        </label><br/>
-        <small className='text-muted'><i>...or</i></small>
-        </div>
-    );
-    }
-
-    handleImagesChange() {
+    handleImagesChange(e) {
+      debugger
         let selectedFiles = this.itemImagesField.files;
-        let { selectedImageFiles } = this.state;
         for (let i = 0; i < selectedFiles.length; i++) {
-          selectedImageFiles.push(selectedFiles.item(i));
-        } //end for
-      
+          this.state.selectedImageFiles.push(selectedFiles[i]);
+        } 
         this.setState(
           {
-            selectedImageFiles: selectedImageFiles
+            selectedImageFiles: [...selectedFiles]
           },
           () => {
             this.itemImagesField.value = null;
@@ -64,10 +26,6 @@ class ImageUpload extends React.Component{
       
       renderSelectedImageFiles() {
         let fileDOMs = this.state.selectedImageFiles.map((el, index) => {
-          if (el._destroy) { 
-            return null;
-          }
-      
           return (
             <li key={index}>
               <div className="photo">
@@ -79,7 +37,7 @@ class ImageUpload extends React.Component{
                 <div
                   className="remove"
                   onClick={() => this.removeSelectedImageFile(el, index)}>
-                  <span style={{ top: 2 }} className="glyphicon glyphicon-remove" />
+                  
                 </div>
               </div>
               <div className="file-name">
@@ -113,30 +71,53 @@ class ImageUpload extends React.Component{
         
       }
       
-      handleFormSubmit = () => {
-          this.props.addImages(this.state.selectedImageFiles)
+      handleFormSubmit = (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target)
+        console.log(formData)
+        this.props.addImages(formData)
       }
 
     render() {
-      const numberOfSelectedImages = this.getNumberOfSelectedFiles();
         return (
           <div className="ItemForm">
-            <form>
-              <div className="form-group">
-                {/* <label>Images</label> */}
-                {this.renderUploadImagesButton()}
+            <form onSubmit={this.handleFormSubmit}>
+              <div>
+                <input
+                    name="images[]"
+                    ref={field => (this.itemImagesField = field)}
+                    type="file"
+                    multiple={true}
+                    accept="image/*"
+                    style={{
+                      width: 0.1,
+                      height: 0.1,
+                      opacity: 0,
+                      overflow: 'hidden',
+                      position: 'absolute',
+                      zIndex: -1
+                    }}
+                    id="item_images"
+                    onChange={e => this.handleImagesChange(e)}
+                    className="form-control"
+                />
+                <label
+                    className="btn btn-primary"
+                    htmlFor="item_images">
+                    Upload Images
+                </label><br/>
+                <small className='text-muted'><i>...or</i></small>
                 {this.renderSelectedImageFiles()}
               </div>
+
             <ImageDropzone />
             <div>
-            {numberOfSelectedImages == 0 ? null :
-              <><button
-                onClick={e => this.handleFormSubmit()}
+            {this.state.selectedImageFiles.length == 0 ? null :
+              <><input
+                type='submit'
                 className="btn btn-primary">
-                 Add {numberOfSelectedImages} file{numberOfSelectedImages !== 1
-                ? 's'
-                : ''}
-              </button>
+                value={`Add ${this.state.selectedImageFiles.length} file(s)`}>
+              </input>
               <button
                 onClick={e => this.handleCancel()}
                 className="btn btn-default">

@@ -509,8 +509,70 @@ button {
   min-width: 200px;
 }
 
+#file-upload-btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.375rem 0.75rem;
+  font-size: 1.2rem;
+  width: 24vw;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin: 10px 40px;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.drop-border {
+  border: 2px solid #007bff;
+  width: 30%;
+  margin: auto;
+  padding: 10px
+}
 
 .css-1rhbuit-multiValue {
     background-color: #1984f73f  !important
   }
 
+  #star-five {
+    margin: 50px 0;
+    position: relative;
+    display: block;
+    color: rgb(230, 199, 29);
+    width: 0px;
+    height: 0px;
+    border-right: 100px solid transparent;
+    border-bottom: 70px solid rgb(230, 199, 29);
+    border-left: 100px solid transparent;
+    transform: rotate(35deg);
+  }
+  #star-five:before {
+    border-bottom: 80px solid rgb(230, 199, 29);
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    position: absolute;
+    height: 0;
+    width: 0;
+    top: -45px;
+    left: -65px;
+    display: block;
+    content: '';
+    transform: rotate(-35deg);
+  }
+  #star-five:after {
+    position: absolute;
+    display: block;
+    color: rgb(230, 199, 29);
+    top: 3px;
+    left: -105px;
+    width: 0px;
+    height: 0px;
+    border-right: 100px solid transparent;
+    border-bottom: 70px solid rgb(230, 199, 29);
+    border-left: 100px solid transparent;
+    transform: rotate(-70deg);
+    content: '';
+  }
