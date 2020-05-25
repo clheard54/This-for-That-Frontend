@@ -18,7 +18,7 @@ class NavBar extends React.Component {
                     <a href="/post">Post an Offering</a>
                     <a href="/catalog">Browse Items</a>
                     <a href="/inbox">Inbox</a>
-                    <a href="/logout" onClick={context.userLogout}>Logout</a>
+                    <a href="/" onClick={context.userLogout}>Logout</a>
                 </div>
               )}
             </UserConsumer>

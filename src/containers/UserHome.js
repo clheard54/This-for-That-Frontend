@@ -15,7 +15,7 @@ class UserHome extends Component{
             <button onClick ={() => {this.props.history.push('/post')}}>Post an Offering</button>
         </div>
         <div className="col" id="favorites">
-            <Favorites/>
+            <Favorites {...this.props}/>
         </div>
 
         </div>

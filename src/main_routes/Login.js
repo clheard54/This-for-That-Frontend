@@ -30,6 +30,7 @@ function Login (props) {
 
     return (
         <div className='login'>
+        {error ? <h4>Hmm, something went wrong. {error}. Please try again</h4> : null}
             <form onSubmit={handleSubmit}>
                 <label>Username: &emsp;</label>
                 <input type='text' name='username' value={username}
@@ -37,9 +38,12 @@ function Login (props) {
                 <br/><br/>
                 <label>Password: &emsp;</label>
                 <input type='password' name='password' value={password} onChange={(e) => setPassword(e.target.value)}></input>
-                <br/><br/><br/>
-                <input type='submit' value="Log In"></input>
+                <br/><br/>
+                <input className='btn-aqua-submit' type='submit' value="Log In"></input><br/><br/>
+                Don't have an account? No problem.
+                <button onClick={() => props.history.push('/signup')}>Sign Up now</button>
             </form>
+
         </div> 
     )
 }

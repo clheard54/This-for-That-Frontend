@@ -7,7 +7,7 @@ import WriteMessage from '../forms/WriteMessage'
 const ItemCard = props => {
     const context = useContext(UserContext)
     const {item} = props
-    const postedDate = new Date(item.created_at).toString().split(' ').slice(1, 3).join(' ')
+    // const postedDate = new Date(item.created_at).toString().split(' ').slice(1, 3).join(' ')
 
     const viewDetails = () => {
         props.history.push(`/items/${item.id}`)
@@ -23,7 +23,7 @@ const ItemCard = props => {
                     <b>Ideal Swap:</b> {item.seeking}</p>
                     <Link to={{pathname: `/items/${item.id}`,
                         state: item}}><button className='btn-pink' onClick={()=> viewDetails}>See Details</button></Link>
-                    <p className="card-text"><small className="text-muted">Posted {postedDate}</small></p>
+                    {/* <p className="card-text"><small className="text-muted">Posted {postedDate}</small></p> */}
             </div>
             {!!item.images ?
             <div className= 'col-md-4'>

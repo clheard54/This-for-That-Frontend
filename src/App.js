@@ -92,7 +92,7 @@ class App extends React.Component {
               <Route
                 exact
                 path="/profile"
-                render = { props => <UserHome {...props} />}/>
+                render = { props => <UserHome {...props} current_user={this.state.current_user}/>}/>
 
               <Route 
                 exact

@@ -52,7 +52,7 @@ const WriteMessage = props => {
                     <input type='hidden' value={recipient}></input>
                     <br/><br/>
 
-                    <label>From: {context.currentUser.username}</label><br/>
+                    <label>From: {context.current_user.username}</label><br/>
                     <input type='hidden' value={context.currentUser}></input>
                     <br/><br/>
 

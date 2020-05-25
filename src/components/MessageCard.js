@@ -1,6 +1,24 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import { api } from '../services/api'
 
-const Message = props => {
-    //render card with message preview for list in inbox
-    //onClick, go to /inbox with detail view rendered if not already on inbox page, also send prop saying renderDetail with this specific card
+const MessageCard = props => {
+    const [sender, setSender] = useState({})
+    const { message } = props
+    const sentDate = new Date(message.created_at).toString().split(' ').slice(1, 3).join(' ')
+
+
+    useEffect(() => {
+        setSender(api.getRequests.findOwner(message))
+    }, [])
+
+    return (
+        <div className='msg-card'>
+            <b>From: sender.username</b>
+            <b>Sent: {sentDate}</b>
+            <br/>
+            <span>{message.message.slice(0, 30)}...</span>
+        </div>
+    )
 }
+
+export default MessageCard

@@ -5,7 +5,7 @@ import { CatalogConsumer } from '../context/CatalogContext'
 import { api } from '../services/api'
 
 const AddOffering = props => {
-    const [type, setType] = useState('item')
+    const [type, setType] = useState('Item')
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [location, setLocation] = useState('')
@@ -134,8 +134,8 @@ const AddOffering = props => {
                     <form onSubmit={handleSubmit}>
                         <label>Are you offering a: &ensp;</label>
                         <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                          <label className={type == 'item' ? "btn btn-aqua active" : "btn btn-aqua"}>
-                            <input type="radio" name="options" id="option-item" value="item" checked={type == 'item'} onChange={handleTypeChange}></input>Thing</label><span style={{'alignSelf': 'center'}}>&emsp;-OR-&emsp;</span>
+                          <label className={type == 'Item' ? "btn btn-aqua active" : "btn btn-aqua"}>
+                            <input type="radio" name="options" id="option-item" value="item" checked={type == 'Item'} onChange={handleTypeChange}></input>Thing</label><span style={{'alignSelf': 'center'}}>&emsp;-OR-&emsp;</span>
                           <label className={type == 'task' ? "btn btn-aqua active" : "btn btn-aqua"}>
                             <input type="radio" name="options" id="option-task" value="task" checked={type == 'task'} onChange={handleTypeChange}></input>Task</label>
                         </div>

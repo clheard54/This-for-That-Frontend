@@ -13,8 +13,7 @@ const LoaderHOC_ = WrappedComponent => {
             console.log("hitting loader")
             this.setState({
                 ready: !!(this.context.receivedItems)
-            })
-            return false
+            }, () => {return this.state.ready})
         }
 
         render() {

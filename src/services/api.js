@@ -100,13 +100,28 @@ const postMessage = (newMessage) => {
   }).then(res => res.json())
 }
 
+const postFavorite = (newFave) => {
+  return fetch(`${API_ROOT}/favorites`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify(newFave)
+  }).then(res => res.json())
+}
+
 const findOwner = (item) => {
   fetch(`${API_ROOT}/users`, {
     headers: headers()
     }).then(res => res.json())
     .then(data => {
-      return data.find(item.user_id)
+      return data.find(user => user.id == item.user_id)
     })
+}
+
+const deleteFavorite = (id) => {
+  return fetch(`${API_ROOT}/favorites/{id}`, {
+    method: 'DELETE',
+    headers: headers()
+    }).then(res => res.json())
 }
 
 
@@ -127,6 +142,10 @@ export const api = {
   posts: {
     postItem,
     postService,
-    postMessage
+    postMessage,
+    postFavorite
+  },
+  delete: {
+    deleteFavorite
   }
 };
