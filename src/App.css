@@ -612,6 +612,14 @@ button {
     text-decoration: none;
   }
 
+  #confirmed {
+    border: 2px solid rgb(74, 248, 190);
+    width: 35%;
+    margin: auto;
+    font-size: 1.17em;
+    font-weight: bold;
+    padding: 10px;
+  }
 
   #star-border {
     margin: 50px 0;
