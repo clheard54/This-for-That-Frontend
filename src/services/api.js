@@ -108,13 +108,10 @@ const postFavorite = (newFave) => {
   }).then(res => res.json())
 }
 
-const findOwner = (item) => {
-  fetch(`${API_ROOT}/users`, {
+const getOwner = () => {
+  return fetch(`${API_ROOT}/users`, {
     headers: headers()
     }).then(res => res.json())
-    .then(data => {
-      return data.find(user => user.id == item.user_id)
-    })
 }
 
 const deleteFavorite = (id) => {
@@ -137,7 +134,7 @@ export const api = {
     getItems,
     getServices,
     getTags,
-    findOwner
+    getOwner
   },
   posts: {
     postItem,

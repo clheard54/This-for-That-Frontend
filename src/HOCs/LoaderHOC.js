@@ -5,19 +5,13 @@ import { api } from '../services/api'
 const LoaderHOC_ = WrappedComponent => {
     class LoaderHOC extends React.Component {
         static contextType = CatalogContext;
-        state = {
-            ready: false
-        }
 
         isReady = () => {
-            console.log("hitting loader")
-            this.setState({
-                ready: !!(this.context.receivedItems)
-            }, () => {return this.state.ready})
+            return !!(this.context.items.length > 0)
         }
 
         render() {
-            return this.isReady ? <WrappedComponent {...this.props} /> : <h3>Loading Data...</h3>
+            return this.isReady() ? <WrappedComponent {...this.props} items={this.context.items}/> : <h3>Loading Data...</h3>
         }
     }
     return LoaderHOC

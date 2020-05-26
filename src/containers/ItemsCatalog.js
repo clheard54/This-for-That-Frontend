@@ -72,7 +72,7 @@ const ItemsCatalog = props => {
             <h1 id='caption'>All the Things.</h1>
             <div className='row-filter'>
             Filter by Category:&ensp;
-            <Select styles={colorStyles} id='dropdown' isMulti options={showItemsTags()} values={filters} onChange={(values) => setFilters([...filters, values])} /></div>
+            <Select styles={colorStyles} id='dropdown' isMulti options={showItemsTags()} values={filters} onChange={(values) => values==null ? setFilters([]) : setFilters([...filters, values])} /></div>
             <br/><br/>
             <div className='card-row'> 
             {/* {filters == [] ? renderItems() : renderFiltered()} */}

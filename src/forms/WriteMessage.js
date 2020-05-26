@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react'
 import UserContext from '../context/userContext'
-
+import LoadUserHOC from '../HOCs/LoadUserHOC'
 import { api } from '../services/api'
 
 const WriteMessage = props => {
@@ -12,8 +12,10 @@ const WriteMessage = props => {
     const { offering } = props
 
     useEffect(() => {
-        let owner = api.getRequests.findOwner(offering);
-        setRecipient(owner)
+        api.getRequests.getOwner().then(data => {
+            let owner = data.find(user => offering.user_id == user.id)
+            setRecipient(owner)
+        })
     }, [])
     
     const handleChange = (e) => {
@@ -24,7 +26,7 @@ const WriteMessage = props => {
         e.preventDefault();
         let newMsg = {
             message: {
-                user_id: context.currentUser.id,
+                user_id: context.current_user.id,
                 recipient: recipient,
                 message: message,
                 offering_type: props.type,
@@ -46,28 +48,27 @@ const WriteMessage = props => {
             {complete ? <><h3>Message Sent!</h3><button onClick={() => this.props.history.push('/catalog')}>Back to Catalog</button></> : 
             <>
               {error ? <h4>Uh-oh, something went wrong. Please try again.</h4> : null}
-
+                <br/><br/>
                 <form onSubmit={handleSubmit}>
-                    <label>To: {recipient.username}</label><br/>
+                    {/* <label>To: {recipient.username}</label><br/> */}
                     <input type='hidden' value={recipient}></input>
-                    <br/><br/>
 
-                    <label>From: {context.current_user.username}</label><br/>
+                    {/* <label>From: {context.current_user.username}</label> */}
                     <input type='hidden' value={context.currentUser}></input>
-                    <br/><br/>
+                    {/* <br/><br/> */}
 
                     <label>Subject:&ensp;</label>
                     <input type='text' name='subject' placeholder={offering.title}></input>
                     <br/><br/>
 
-                    <textarea rows='5' cols='30' name="message" value={message} onChange={() => handleChange}></textarea>
+                    <textarea rows='10' cols='60' name="message" value={message} onChange={handleChange}></textarea>
                     <br/><br/>
 
-                    <input type='submit' value="Send Message"></input>
+                    <input className="btn btn-primary" type='submit' value="Send Message"></input>
                 </form> 
               </>}
         </Fragment>
     )
 }
 
-export default WriteMessage;
+export default LoadUserHOC(WriteMessage);

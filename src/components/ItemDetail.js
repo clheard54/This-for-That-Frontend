@@ -7,10 +7,10 @@ import { api } from '../services/api'
 
 const ItemDetail = props => {
     const context = useContext(UserContext)
-    const item = props.location.state
     const [msg, setMsg] = useState(false)
     const [favorite, setFavorite] = useState(false)
     const [error, setError] = useState(false)
+    const item = props.items.find(x => props.match.params.id)
 
     useEffect(() => {
       api.getRequests.getFavorites().then(data => {
@@ -44,6 +44,7 @@ const ItemDetail = props => {
       }
     }
 
+
      const renderDetail = () => {
         return (
           <>
@@ -58,9 +59,9 @@ const ItemDetail = props => {
                 <small>Estimated Value: {item.value}</small><br/><br/>
             </div>
             <br/>
-            <span>Interested in learning more or making an offer?</span><br/><br/>
-            <button className='btn btn-primary' onClick={()=>setMsg(true)}>Write Message</button>
-                {!!msg ? <WriteMessage type='Item' offering={item}/> : null}
+            <span>Interested in learning more or making an offer?</span><br/>
+            {!msg ? <><br/><button className='btn btn-primary' onClick={()=>setMsg(true)}>Write Message</button></> : <WriteMessage type='Item' offering={item}/> }
+                
 
             </> )
         }
