@@ -192,6 +192,15 @@ button {
   padding: 1.25rem;
 }
 
+.card-body-2 {
+  display: flex;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  flex-direction: row;
+  min-height: 1px;
+  padding: 10px;
+}
+
 .card-title {
   margin-bottom: 0.75rem;
 }
@@ -552,6 +561,7 @@ button {
   }
 
   #star-five {
+    z-index: 1;
     margin: 50px 0;
     position: relative;
     bottom: 20px;
@@ -606,25 +616,26 @@ button {
   #star-border {
     margin: 50px 0;
     position: relative;
-    bottom: 20px;
-    left: 15px;
+    bottom: 23px;
+    left: -44px;
     color: rgb(243, 46, 250);
     width: 0px;
     height: 0px;
-    border-right: 28px solid transparent;
-    border-bottom: 20.5px solid rgb(243, 46, 250);
-    border-left: 28px solid transparent;
+    border-right: 36px solid transparent;
+    border-bottom: 23.5px solid rgb(243, 46, 250);
+    border-left: 32px solid transparent;
     transform: rotate(35deg);
+    z-index: 0;
   }
   #star-border:before {
     border-bottom: 23px solid rgb(243, 46, 250);
-    border-left: 10.5px solid transparent;
-    border-right: 10.5px solid transparent;
+    border-left: 12.5px solid transparent;
+    border-right: 12.5px solid transparent;
     position: absolute;
     height: 0;
     width: 0;
-    top: 15px;
-    left: -16px;
+    top: 14px;
+    left: -20px;
     display: block;
     content: '';
     transform: rotate(-35deg);
@@ -633,13 +644,25 @@ button {
     position: absolute;
     display: block;
     color: rgb(243, 46, 250);
-    top: 28px;
-    left: -26px;
+    top: 27px;
+    left: -32px;
     width: 0px;
     height: 0px;
-    border-right: 28px solid transparent;
-    border-bottom: 20.5px solid rgb(243, 46, 250);
-    border-left: 28px solid transparent;
+    border-right: 35px solid transparent;
+    border-bottom: 24.5px solid rgb(243, 46, 250);
+    border-left: 32px solid transparent;
     transform: rotate(-70deg);
     content: '';
+  }
+
+  #fave-pic {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    overflow: hidden;
+  }
+
+  .small {
+    font-size: smaller;
+    width: 80px;
   }

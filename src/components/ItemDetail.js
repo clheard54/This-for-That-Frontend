@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import WriteMessage from '../forms/WriteMessage'
 import LoaderHOC_ from '../HOCs/LoaderHOC'
+import LoadUserHOC from '../HOCs/LoadUserHOC'
 import UserContext from "../context/userContext";
 import { api } from '../services/api'
 
@@ -29,7 +30,6 @@ const ItemDetail = props => {
             offering_id: item.id
           }
         }
-        debugger
         console.log(newFave)
         api.posts.postFavorite(newFave).then(data => {
           if (!data.error){
@@ -49,7 +49,7 @@ const ItemDetail = props => {
           <>
           <br/>
           <h2>Offering: {item.title}<span onClick={addFavorite}id='star-five'></span>{!!favorite ? <span id='star-border'></span>:null}</h2>
-          {favorite ? <span style={{'color': 'rgb(245, 88, 232)'}}>In Your Favorites</span> : null}
+          {favorite ? <span style={{'color': 'rgb(42, 212, 147)'}}>In Your Favorites</span> : null}
             <div>
                 <p style={{'fontSize': 'large'}}>{item.description}</p><br/>
                 {/* IMAGES: <img src={}></img> */}
@@ -76,4 +76,4 @@ const ItemDetail = props => {
     )
 }
 
-export default LoaderHOC_(ItemDetail)
+export default LoadUserHOC(LoaderHOC_(ItemDetail))

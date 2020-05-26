@@ -1,12 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
-import {CatalogContext} from '../context/CatalogContext'
+import UserContext from '../context/userContext'
 import WriteMessage from '../forms/WriteMessage'
-
+import { api } from '../services/api'
 
 const ServiceDetail = props => {
-    const context = useContext(CatalogContext)
-    const {type} = props
+    const context = useContext(UserContext)
+    const item = props.location.state
     const [msg, setMsg] = useState(false)
+    const [favorite, setFavorite] = useState(false)
+    const [error, setError] = useState(false)
     const thisService = {
         title: '',
         description: '',
@@ -16,9 +18,19 @@ const ServiceDetail = props => {
     }
 
     useEffect(() => {
-        const id = this.props.match.params.id;
-        thisService = context.services.find(id)
+      api.getRequests.getFavorites().then(data => {
+        let isFavorite = data.filter(fave => fave.user_id == context.current_user.id).filter(fave => fave.offering_type == 'Service').filter(fave => fave.offering_id == item.id)
+        if (isFavorite.length>0){
+          setFavorite(true)
+        }
+      })
     }, [])
+
+    
+    // useEffect(() => {
+    //     const id = props.match.params.id;
+    //     thisService = context.services.find(id)
+    // }, [])
     
   return (
     <div className='flex-row'>

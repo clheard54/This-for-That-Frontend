@@ -40,9 +40,9 @@ function Login (props) {
                 <input type='password' name='password' value={password} onChange={(e) => setPassword(e.target.value)}></input>
                 <br/><br/>
                 <input className='btn-aqua-submit' type='submit' value="Log In"></input><br/><br/>
+            </form>
                 Don't have an account? No problem.
                 <button onClick={() => props.history.push('/signup')}>Sign Up now</button>
-            </form>
 
         </div> 
     )
