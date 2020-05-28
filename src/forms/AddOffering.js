@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useRef } from 'react'
 import UserContext, { UserConsumer } from '../context/userContext'
+import MyUploader from './DropzoneUpload'
 import ImageDropzone from './Dropzone'
 import { CatalogConsumer } from '../context/CatalogContext'
 import { api } from '../services/api'
@@ -63,31 +64,20 @@ const AddOffering = props => {
       setImages([...images, ...photos])
     }
 
-    const buildFormData = () => {
+    const removeImage = (photo) => {
+      setImages([...images.filter(x => x !== photo)])
+    }
+
+    const buildFormData = (id) => {
       let formData = new FormData();
       formData.append('item[title]', title);
       formData.append('item[description]', description);
       formData.append('item[location]', location);
       formData.append('item[value]', value);
       formData.append('item[seeking]', seeking);
-    
-      for (let i = 0; i < images.length; i++) {
-        let file = images[i];
-        if (file.id) {
-          if (file._destroy) {
-            formData.append(`item[images_attributes][${i}][id]`, file.id);
-            formData.append(`item[images_attributes][${i}][_destroy]`, '1');
-          }
-        } else {
-          formData.append(
-            `item[images_attributes][${i}][file]`,
-            file,
-            file.name
-          );
-        }
-      }
+      formData.append(`item[image]`, images[0]);
+      formData.append('item[user_id]', id)
       return formData;
-
     }
 
     // const handleImagesChange = () => {
@@ -99,12 +89,13 @@ const AddOffering = props => {
 
     const handleSubmit = event => {
       event.preventDefault();
-      const newOffering = new FormData(event.target)
-      type == "item" ? 
+      let id = event.target.userID.value;
+      const newOffering = buildFormData(id)
+      type == "Item" ? 
       api.posts.postItem(newOffering).then(resp => {
           if (!resp.error){
               setComplete(true)
-              // .then(data => props.setPost(data.post))
+              id = resp.id
           } else {
               setError(resp.error)
           }
@@ -113,6 +104,7 @@ const AddOffering = props => {
       api.posts.postService(newOffering).then(resp => {
         if (!resp.error){
             setComplete(true)
+            id=resp.id
         } else {
             setError(resp.error)
         }
@@ -121,6 +113,7 @@ const AddOffering = props => {
         .filter(checkbox => checkboxes[checkbox])
           .forEach(checkbox => {
             //create new TagsOffering instance;
+            api.posts.postTagOffering(checkbox, type, id)
           });
       
       };
@@ -130,14 +123,14 @@ const AddOffering = props => {
           <CatalogConsumer>{(catalogContext) => (
               <UserConsumer>{(userContext) => (
                 <Fragment>
-                {complete ? <><h3>Success! Your offering has been posted.</h3><br/><button>Back to Catalog</button><button>Back to Profile</button></> : error ? <><h3>Uh-Oh something went wrong. Please try again...</h3>{error}</> : <><h2>What you Got?</h2>
+                {complete ? <><h3>Success! Your offering has been posted.</h3><br/><button>Back to Catalog</button><button>Back to Profile</button></> : error ? <><h3>Uh-Oh something went wrong. Please try again...</h3>{error}<br/><button onClick={() => props.history.push('/catalog')}>Back to Catalog</button><button onClick={() => props.history.push('/post')}>Try Again</button></> : <><h2>What you Got?</h2>
                     <form onSubmit={handleSubmit}>
                         <label>Are you offering a: &ensp;</label>
                         <div className="btn-group btn-group-toggle" data-toggle="buttons">
                           <label className={type == 'Item' ? "btn btn-aqua active" : "btn btn-aqua"}>
-                            <input type="radio" name="options" id="option-item" value="item" checked={type == 'Item'} onChange={handleTypeChange}></input>Thing</label><span style={{'alignSelf': 'center'}}>&emsp;-OR-&emsp;</span>
-                          <label className={type == 'task' ? "btn btn-aqua active" : "btn btn-aqua"}>
-                            <input type="radio" name="options" id="option-task" value="task" checked={type == 'task'} onChange={handleTypeChange}></input>Task</label>
+                            <input type="radio" name="options" id="option-item" value="Item" checked={type == 'Item'} onChange={handleTypeChange}></input>Thing</label><span style={{'alignSelf': 'center'}}>&emsp;-OR-&emsp;</span>
+                          <label className={type == 'Task' ? "btn btn-aqua active" : "btn btn-aqua"}>
+                            <input type="radio" name="options" id="option-task" value="Task" checked={type == 'Task'} onChange={handleTypeChange}></input>Task</label>
                         </div>
                         <br/><br/>
 
@@ -174,11 +167,14 @@ const AddOffering = props => {
                         </label>
                         <span id="file-selected"></span> 
                         <input type="file" name="images" style={{ 'opacity': '0'}} accept="image/*" onChange={e => setImages([...images, e.target.value])}/> */}
-
+                        Got images? <br/>
+                        <small>(Upload up to 5 below)</small><br/><br/>
+                        <ImageDropzone {...props} addImages={addImages} removeImage={removeImage}/>
+                      
                         {/* <br/><small>...or</small><br/><br/> */}
-                        <div className='drop-border'>
-                        <ImageDropzone {...props} addImages={addImages} />
-                        </div>
+                        {/* <div className='drop-border'>
+                        <MyUploader {...props} addImages={addImages} />
+                        </div> */}
 
                         <input type='hidden' name='userID' value={userContext.current_user.id}></input>
                         <br/><br/>

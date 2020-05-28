@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import DropzoneComponent from 'react-dropzone-component';
 
+
 const djsConfig = {
   acceptedFiles: "image/jpeg,image/png,image/gif, image/jpg",
   autoProcessQueue: false,
@@ -12,7 +13,7 @@ const componentConfig = {
   iconFiletypes: ['.jpg', '.png', '.gif', '.jpeg'],
   showFiletypeIcon: false,
   maxFiles: 10,
-  postUrl: 'no-url'
+  postUrl: 'https://api.cloudinary.com/v1_1/clahon54/upload'
 }
 
 export default class ImageDropzone extends PureComponent {
@@ -45,11 +46,7 @@ export default class ImageDropzone extends PureComponent {
   }
 
   addNew = (img) => {
-      this.setState(prev => {
-          return {
-          addedImages: [...prev.addedImages, img]
-          }
-      }, ()=> this.props.addImages(this.state.addedImages))
+      this.props.addImages(this.state.addedImages)
   }
 
   removeImage = (img) => {
@@ -57,7 +54,7 @@ export default class ImageDropzone extends PureComponent {
         return {
         addedImages: [...prev.addedImages.filter(file => file !== img)]
         }
-    })
+    }, () => this.props.removeImage(img))
 }
 
   render() {
@@ -76,24 +73,17 @@ export default class ImageDropzone extends PureComponent {
 
     return (
       <>
-       <span style={{'lineHeight': '200%'}}>Got Photos?</span>
-        <br/>
-        <DropzoneComponent
-          config={componentConfig}
-          eventHandlers={eventHandlers}
-          djsConfig={djsConfig}
-        />
+        <div className='drop-border'>
+        <div className='drop-inner'>
+          <DropzoneComponent
+            config={componentConfig}
+            eventHandlers={eventHandlers}
+            djsConfig={djsConfig}
+          />
+          </div>
+        </div>
         <br/>
       </>
     );
   }
 }
-
-// ImageDropzone.propTypes = {
-//   image: PropTypes.shape({
-//     name: PropTypes.string,
-//     byte_size: PropTypes.integer,
-//     url: PropTypes.string
-//   })
-// }
-

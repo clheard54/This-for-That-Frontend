@@ -5,6 +5,7 @@ import { api } from '../services/api'
 import MessageCard from '../components/MessageCard'
 import MessageDetail from '../components/MessageDetail'
 import WriteMessage from '../forms/WriteMessage'
+import LoadUserHOC from '../HOCs/LoadUserHOC'
 //Shows list of MessageCards in column
 //onClick of any card => cards slide to left column, and space open in middle for MessageDetail view
 
@@ -42,7 +43,6 @@ class Inbox extends Component{
         this.setState({reply: true})
     }
 
-
     render(){
         return (
            <>
@@ -69,4 +69,4 @@ class Inbox extends Component{
     }
 }
 
-export default Inbox;
+export default LoadUserHOC(Inbox);

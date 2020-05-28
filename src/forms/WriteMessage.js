@@ -45,7 +45,7 @@ const WriteMessage = props => {
 
     return (
         <Fragment>
-            {!complete ? <><br/><div id='confirmed'>Message Sent!</div></> : 
+            {complete ? <><br/><div id='confirmed'>Message Sent!</div></> : 
             <>
               {error ? <h4>Uh-oh, something went wrong. Please try again.</h4> : null}
                 <br/><br/>

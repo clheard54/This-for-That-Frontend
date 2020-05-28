@@ -73,7 +73,6 @@ const postItem = (formData) => {
   return fetch(`${API_ROOT}/items`, {
     method: 'POST',
     headers: {
-      Accept: "application/json",
       Authorization: userToken()
     },
     body: formData
@@ -97,6 +96,14 @@ const postMessage = (newMessage) => {
     method: 'POST',
     headers: headers(),
     body: JSON.stringify(newMessage)
+  }).then(res => res.json())
+}
+
+const postTagOffering = (tag, type, item) => {
+  return fetch(`${API_ROOT}/tags_offerings`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify({tag_id: tag.id, offering_type: type, offering_id: item.id})
   }).then(res => res.json())
 }
 
@@ -140,7 +147,8 @@ export const api = {
     postItem,
     postService,
     postMessage,
-    postFavorite
+    postFavorite,
+    postTagOffering
   },
   delete: {
     deleteFavorite

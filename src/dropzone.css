@@ -1,0 +1,103 @@
+.dzu-dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 120px;
+    overflow: scroll;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+    transition: all .15s linear;
+    border: 2px solid #d9d9d9;
+    border-radius: 4px;
+  }
+  
+  .dzu-dropzoneActive {
+    background-color: #DEEBFF;
+    border-color: #2484FF;
+  }
+  
+  .dzu-dropzoneDisabled {
+    opacity: 0.5;
+  }
+  
+  .dzu-dropzoneDisabled *:hover {
+    cursor: unset;
+  }
+  
+  .dzu-input {
+    display: none;
+  }
+  
+  .dzu-inputLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2484FF;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    cursor: pointer;
+  }
+  
+  .dzu-inputLabelWithFiles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    right: 50px;
+    padding: 0 14px;
+    min-height: 32px;
+    background-color: #E6E6E6;
+    color: #2484FF;
+    border: none;
+    font-family: 'Helvetica', sans-serif;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-left: 3%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    cursor: pointer;
+  }
+  
+  
+  .dzu-previewImage { 
+    align-self: flex-start;
+    width: auto;
+    margin-top: 10px;
+    max-height: 100px;
+    max-width: 340px;
+    border-radius: 2px;
+  }
+
+  .dzu-previewStatusContainer{
+      display: none;
+  }
+
+  .dzu-previewContainer{
+      display: flex;
+      flex-direction: row;
+      overflow-wrap: normal;
+      align-content: flex-start;
+  }
+  
+
+  .dzu-submitButton {
+    display: none;
+  }
+  
+  .dzu-submitButton:disabled {
+    background-color: #E6E6E6;
+    color: #333333;
+    cursor: unset;
+  }
