@@ -723,3 +723,7 @@ button {
   .dz-image{
     margin: 5px
   }
+
+  .align-left {
+    justify-content: left;
+  }

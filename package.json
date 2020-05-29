@@ -15,7 +15,8 @@
     "react-images-upload": "^1.2.8",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "react-select": "^3.1.0"
+    "react-select": "^3.1.0",
+    "react-timer-mixin": "^0.13.4"
   },
   "scripts": {
     "start": "PORT=3001 react-scripts start",

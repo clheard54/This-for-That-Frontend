@@ -3,6 +3,7 @@ import WriteMessage from '../forms/WriteMessage'
 import LoaderHOC_ from '../HOCs/LoaderHOC'
 import LoadUserHOC from '../HOCs/LoadUserHOC'
 import UserContext from "../context/userContext";
+import TimerMixin from 'react-timer-mixin'
 import { api } from '../services/api'
 
 const ItemDetail = props => {
@@ -10,7 +11,7 @@ const ItemDetail = props => {
     const [msg, setMsg] = useState(false)
     const [favorite, setFavorite] = useState(false)
     const [error, setError] = useState(false)
-    const item = props.items.find(x => props.match.params.id)
+    const item = props.items.find(x => x.id == props.match.params.id)
 
     useEffect(() => {
       api.getRequests.getFavorites().then(data => {
@@ -30,10 +31,12 @@ const ItemDetail = props => {
             offering_id: item.id
           }
         }
-        console.log(newFave)
         api.posts.postFavorite(newFave).then(data => {
           if (!data.error){
-            setFavorite(data)
+            TimerMixin.setTimeout(
+              () => this.setState({
+                  favorite: false}),
+                  2000)
           } else {
             setError(true)
           }
@@ -49,14 +52,18 @@ const ItemDetail = props => {
         return (
           <>
           <br/>
-          <h2>Offering: {item.title}<span onClick={addFavorite}id='star-five'></span>{!!favorite ? <span id='star-border'></span>:null}</h2>
-          {favorite ? <span style={{'color': 'rgb(42, 212, 147)'}}>In Your Favorites</span> : null}
-            <div>
-                <p style={{'fontSize': 'large'}}>{item.description}</p><br/>
-                {/* IMAGES: <img src={}></img> */}
-            <p><b>Seeking:</b> {item.seeking} </p>
+          <h2>{item.title}<span onClick={addFavorite}id='star-five'></span>{!!favorite ? <span id='star-border'></span>:null} 
+          {favorite ? <span style={{'fontSize': '1rem', 'fontWeight': 'normal', 'color': 'rgb(42, 212, 147)', 'position': 'relative', 'right': '34px'}}>Added to Favorites!</span> : <><br/><hr style={{'width': '25%', 'border': '0', 'border': "1px solid rgb(243, 46, 250)"}}></hr></>}</h2>
+          
+          <br/>
+            <div className='image-col'>
+              <img src={!!item.image ? `${item.image.url}` : "https://cultmtl.com/wp-content/uploads/2016/07/barter.jpg"} width="500" alt={!!item.image ? `${item.title} - photo1` : "Generic bartering image"}/>
+            </div> 
+            <div className='align-left'>
+                <p style={{'fontSize': 'large'}}>{item.description}</p>
+            <p><b>Ideal Exchange:</b> {item.seeking} </p>
                 <small>Location: {item.location}</small><br/>
-                <small>Estimated Value: {item.value}</small><br/><br/>
+                <small>Estimated Value: {!!item.value ? item.value : "None listed"}</small><br/><br/>
             </div>
             <br/>
             <span>Interested in learning more or making an offer?</span><br/>
