@@ -509,9 +509,9 @@ button {
 }
 
 #detail-back {
-  position: absolute;
-  left: 10%;
-  bottom: 5%;
+  position: relative;
+  right: 40%;
+  /* bottom: 5%; */
   border:2px solid  rgb(245, 88, 232);
   color: rgb(245, 88, 232);
 }

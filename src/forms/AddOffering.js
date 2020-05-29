@@ -17,8 +17,6 @@ const AddOffering = props => {
     const [images, setImages] = useState([])
     const [checkboxes, setCheckboxes] = useState({})
 
-    let itemImagesField = useRef(null);
-
     const setInitialState = (context) => {
         context.tags.forEach(tag => {
             if (!checkboxes[tag]){
@@ -75,8 +73,9 @@ const AddOffering = props => {
       formData.append('item[location]', location);
       formData.append('item[value]', value);
       formData.append('item[seeking]', seeking);
-      formData.append(`item[image]`, images[0]);
       formData.append('item[user_id]', id)
+      if (!!images[0]){
+        formData.append(`item[image]`, images[0])}
       return formData;
     }
 
@@ -113,9 +112,9 @@ const AddOffering = props => {
         .filter(checkbox => checkboxes[checkbox])
           .forEach(checkbox => {
             //create new TagsOffering instance;
+            console.log(checkbox)
             api.posts.postTagOffering(checkbox, type, id)
           });
-      
       };
 
     return (
@@ -179,7 +178,7 @@ const AddOffering = props => {
                         <input type='hidden' name='userID' value={userContext.current_user.id}></input>
                         <br/><br/>
 
-                        <button id='post-back' className='btn btn-submit' onClick={()=> props.history.push('/profile')} >Go Back</button>
+                        <button id='post-back' className='btn btn-submit' onClick={()=> setError(false)} >Go Back</button>
                         <input id='post-btn' className='btn btn-submit' type="submit" value="Post it!"></input>
                     </form></> }
                   </Fragment>

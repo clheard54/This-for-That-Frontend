@@ -100,6 +100,12 @@ const postMessage = (newMessage) => {
 }
 
 const postTagOffering = (tag, type, item) => {
+  let tag_id
+  fetch(`{API_ROOT}/tags`).then(resp => resp.json())
+  .then(data => {
+    tag_id = data.find(x => x.category == tag)
+    console.log(tag_id)
+  })
   return fetch(`${API_ROOT}/tags_offerings`, {
     method: 'POST',
     headers: headers(),
@@ -122,7 +128,7 @@ const getOwner = () => {
 }
 
 const deleteFavorite = (id) => {
-  return fetch(`${API_ROOT}/favorites/{id}`, {
+  return fetch(`${API_ROOT}/favorites/${id}`, {
     method: 'DELETE',
     headers: headers()
     }).then(res => res.json())

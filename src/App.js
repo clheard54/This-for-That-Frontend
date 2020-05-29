@@ -8,6 +8,7 @@ import NavBar from './main_routes/NavBar';
 import Login from './main_routes/Login';
 import LandingPage from './main_routes/LandingPage';
 import Signup from './main_routes/Signup';
+import Profile from './components/Profile'
 import UserHome from './containers/UserHome';
 import Catalog from './containers/Catalog';
 import ItemsCatalog from './containers/ItemsCatalog';
@@ -123,6 +124,11 @@ class App extends React.Component {
                 exact
                 path='/post' 
                 render={props => <AddOffering {...props}/>} /> 
+
+              <Route 
+                exact
+                path='/myposts' 
+                render={props => <Profile {...props}/>} /> 
         
               <Route 
                 exact

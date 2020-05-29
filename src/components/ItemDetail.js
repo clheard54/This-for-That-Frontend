@@ -9,7 +9,7 @@ import { api } from '../services/api'
 const ItemDetail = props => {
     const context = useContext(UserContext)
     const [msg, setMsg] = useState(false)
-    const [favorite, setFavorite] = useState(false)
+    const [favorite, setFavorite] = useState({})
     const [error, setError] = useState(false)
     const item = props.items.find(x => x.id == props.match.params.id)
 
@@ -17,7 +17,7 @@ const ItemDetail = props => {
       api.getRequests.getFavorites().then(data => {
         let isFavorite = data.filter(fave => fave.user_id == context.current_user.id).filter(fave => fave.offering_type == 'Item').filter(fave => fave.offering_id == item.id)
         if (isFavorite.length>0){
-          setFavorite(true)
+          setFavorite(isFavorite[0])
         }
       })
     }, [])
@@ -33,10 +33,11 @@ const ItemDetail = props => {
         }
         api.posts.postFavorite(newFave).then(data => {
           if (!data.error){
+            setFavorite(data)
+            setMsg(true)
             TimerMixin.setTimeout(
-              () => this.setState({
-                  favorite: false}),
-                  2000)
+              () => setMsg(false),
+                  3000)
           } else {
             setError(true)
           }
@@ -53,7 +54,7 @@ const ItemDetail = props => {
           <>
           <br/>
           <h2>{item.title}<span onClick={addFavorite}id='star-five'></span>{!!favorite ? <span id='star-border'></span>:null} 
-          {favorite ? <span style={{'fontSize': '1rem', 'fontWeight': 'normal', 'color': 'rgb(42, 212, 147)', 'position': 'relative', 'right': '34px'}}>Added to Favorites!</span> : <><br/><hr style={{'width': '25%', 'border': '0', 'border': "1px solid rgb(243, 46, 250)"}}></hr></>}</h2>
+          {msg ? <span style={{'fontSize': '1rem', 'fontWeight': 'normal', 'color': 'rgb(42, 212, 147)', 'position': 'relative', 'right': '34px'}}>Added to Favorites!</span> : (!!favorite ? <span style={{'fontSize': '1rem', 'fontWeight': 'normal', 'color': 'rgb(42, 212, 147)', 'position': 'relative', 'right': '34px'}}>In Favorites!</span> : <><br/><hr style={{'width': '20%', 'border': '0', 'border': "1px solid rgb(243, 46, 250)", 'marginTop': '25px'}}></hr></>)}</h2>
           
           <br/>
             <div className='image-col'>
