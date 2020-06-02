@@ -79,6 +79,25 @@ const postItem = (formData) => {
   }).then(res => res.json())
 }
 
+const editItem = (formData, id) => {
+  return fetch(`${API_ROOT}/items/${id}`, {
+    method: 'PATCH',
+    headers: {
+      Authorization: userToken()
+    },
+    body: formData
+  }).then(res => res.json())
+}
+
+const editService= (formData, id) => {
+  return fetch(`${API_ROOT}/services/${id}`, {
+    method: 'PATCH',
+    headers: {
+      Authorization: userToken()
+    },
+    body: formData
+  }).then(res => res.json())
+}
 
 const postService = (newService) => {
   return fetch(`${API_ROOT}/services`, {
@@ -134,6 +153,20 @@ const deleteFavorite = (id) => {
     }).then(res => res.json())
 }
 
+const deleteItem = (id) => {
+  return fetch(`${API_ROOT}/items/${id}`, {
+    method: 'DELETE',
+    headers: headers()
+    }).then(res => res.json())
+}
+
+const deleteService = (id) => {
+  return fetch(`${API_ROOT}/services/${id}`, {
+    method: 'DELETE',
+    headers: headers()
+    }).then(res => res.json())
+}
+
 
 export const api = {
   auth: {
@@ -157,6 +190,12 @@ export const api = {
     postTagOffering
   },
   delete: {
-    deleteFavorite
+    deleteFavorite,
+    deleteItem,
+    deleteService
+  },
+  update: {
+    editItem,
+    editService
   }
 };

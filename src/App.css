@@ -115,6 +115,29 @@ button {
   align-items: flex-start;
 }
 
+#deleter {
+  position: relative;
+  right: 3.5%;
+  top: -2px;
+  font-weight: bold;
+  color: #007bff;
+  width: 3vh;
+  height: 3vh;
+  padding: 0;
+  border: 1px solid  #007bff;
+  border-radius: 0;
+  border-top: transparent;
+  border-right: 0
+}
+
+.flex-row1 {
+  width: 100%;
+  display: flex;
+  direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .flex-row {
   width: 100%;
   display: flex;
@@ -203,6 +226,7 @@ button {
 
 .card-title {
   margin-bottom: 0.75rem;
+  font-size: large;
 }
 
 .card-subtitle {
@@ -467,6 +491,19 @@ button {
   border-color: rgb(245, 88, 232);
 }
 
+
+.btn-pink-submit {
+  color: #fff;
+  background-color: rgb(245, 88, 232);
+  border-color: rgb(245, 88, 232);
+  width: 80px;
+  height: 35px;
+  font-size: 1rem;
+  border: 1px solid transparent;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+}
+
 .btn-aqua-submit {
   color: #fff;
   background-color: rgb(42, 212, 147);
@@ -665,14 +702,14 @@ button {
 
   #fave-pic {
     width: 120px;
-    height: 120px;
     object-fit: cover;
     overflow: hidden;
   }
 
   .small {
     font-size: smaller;
-    width: 80px;
+    width: 65px;
+    padding: 1px;
   }
 
 
@@ -726,4 +763,8 @@ button {
 
   .align-left {
     justify-content: left;
+  }
+
+  .image-detail{
+    max-height: 350px;
   }

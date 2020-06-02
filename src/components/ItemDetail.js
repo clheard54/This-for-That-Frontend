@@ -57,8 +57,8 @@ const ItemDetail = props => {
           {msg ? <span style={{'fontSize': '1rem', 'fontWeight': 'normal', 'color': 'rgb(42, 212, 147)', 'position': 'relative', 'right': '34px'}}>Added to Favorites!</span> : (!!favorite ? <span style={{'fontSize': '1rem', 'fontWeight': 'normal', 'color': 'rgb(42, 212, 147)', 'position': 'relative', 'right': '34px'}}>In Favorites!</span> : <><br/><hr style={{'width': '20%', 'border': '0', 'border': "1px solid rgb(243, 46, 250)", 'marginTop': '25px'}}></hr></>)}</h2>
           
           <br/>
-            <div className='image-col'>
-              <img src={!!item.image ? `${item.image.url}` : "https://cultmtl.com/wp-content/uploads/2016/07/barter.jpg"} width="500" alt={!!item.image ? `${item.title} - photo1` : "Generic bartering image"}/>
+            <div >
+              <img className='image-detail' src={!!item.image ? `${item.image.url}` : "https://cultmtl.com/wp-content/uploads/2016/07/barter.jpg"} alt={!!item.image ? `${item.title} - photo1` : "Generic bartering image"}/>
             </div> 
             <div className='align-left'>
                 <p style={{'fontSize': 'large'}}>{item.description}</p>

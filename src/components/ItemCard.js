@@ -21,7 +21,8 @@ const ItemCard = props => {
                 <h4 className="card-title">{item.title}</h4>
                     <p className="card-text">{item.description}.<br/><br/>
                     <b>Ideal Swap:</b> {item.seeking}<br/>
-                    <small className='text-muted'><i>Location: {item.location}</i></small></p>
+                    <small className='text-muted'><i>Location: {item.location}</i></small><br/>
+                    <small className='text-muted'><i>Estimated Value: {item.value}</i></small></p>
                     {!!item.image ? null :
                     <Link to={{pathname: `/items/${item.id}`,
                         state: item}}><button className='btn-pink' onClick={()=> viewDetails}>See Details</button></Link>}
@@ -32,7 +33,7 @@ const ItemCard = props => {
                 <br/>
                 <p><img src={!!item.image.url ? `${item.image.url}` : "https://cultmtl.com/wp-content/uploads/2016/07/barter.jpg"} width="160" alt={`${item.title} - photo1`}/></p>
                 <Link to={{pathname: `/items/${item.id}`,
-                    state: item}}><button className='btn-pink' onClick={()=> viewDetails}>See Details</button></Link>
+                    state: item}}><button className='btn-pink-small' onClick={()=> viewDetails}>See Details</button></Link>
             </div> : null}
             </div>
         </div>

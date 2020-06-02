@@ -1,6 +1,6 @@
 import React from 'react'
-import AddOffering from './AddOffering'
-import ImageDropzone from './Dropzone'
+import AddOffering from '../../forms/AddOffering'
+import ImageDropzone from '../../forms/Dropzone'
 
 class ImageUpload extends React.Component{
   state = {

@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useRef } from 'react'
 import UserContext, { UserConsumer } from '../context/userContext'
-import MyUploader from './DropzoneUpload'
 import ImageDropzone from './Dropzone'
 import { CatalogConsumer } from '../context/CatalogContext'
 import { api } from '../services/api'
@@ -69,6 +68,7 @@ const AddOffering = props => {
     const buildFormData = (id) => {
       let formData = new FormData();
       formData.append('item[title]', title);
+      formData.append('item[type', type);
       formData.append('item[description]', description);
       formData.append('item[location]', location);
       formData.append('item[value]', value);

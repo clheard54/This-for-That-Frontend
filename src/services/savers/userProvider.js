@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
-import userContext from './userContext';
-import { api } from '../services/api'
+import userContext from '../../context/userContext';
+import { api } from '../api'
 
 const userProvider = ({children}) => {
     const [color, setColor] = useState("Red");
