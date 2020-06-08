@@ -15,16 +15,10 @@ const MyPosts = (props) => {
     const { user_id } = props.location.state
 
     useEffect(() => {
-        items.forEach(item => {
-            if (item.user_id == user_id){
-                setMyPosts([...myPosts, {...item, type: "Item"}])
-            }
-        })
-        services.forEach(task => {
-            if (task.user_id == user_id){
-                setMyPosts([...myPosts, {...task, type: "Task"}])
-            }
-        })
+        let myItems = items.filter(item => item.user_id == user_id);
+        let myServices = services.filter(task => task.user_id == user_id);
+        console.log(myItems.concat(myServices))
+        // setMyPosts([...myItems, ...myServices])
     }, [])
 
     const editItem = (offering) => {
@@ -47,18 +41,18 @@ const MyPosts = (props) => {
                     {!!form && form==post.id ?
                         <EditForm {...props} offering={post} type="Item" resetForm={resetForm}/> :
                     <><ItemCard {...props} item={post} onClick={() => props.history.push(`/items/${post.id}`)}/>
-                    <button id="deleter" onClick={() => api.delete.deleteItem(post.id)}>x</button>
+                    <button className='btn' id="deleter" onClick={() => api.delete.deleteItem(post.id)}>x</button>
                     <br/>
-                    <button onClick={() => editItem(post)}>Edit Posting</button></> }
+                    <button className='btn' onClick={() => editItem(post)}>Edit Posting</button></> }
                 </div> 
                 : 
                 <div className='flex-row1'>
                     {!!form && form==post.id ?
                         <EditForm {...props} offering={post} type="Task" resetForm={resetForm}/> :
                     <><ServiceCard {...props} service={post} onClick={() => props.history.push(`/services/${post.id}`)}/>
-                    <button id="deleter" onClick={() => api.delete.deleteService(post.id)}>x</button>
+                    <button className='btn' id="deleter" onClick={() => api.delete.deleteService(post.id)}>x</button>
                     <br/>
-                    <button onClick={() => editItem(post)}>Edit Posting</button></> }
+                    <button className='btn' onClick={() => editItem(post)}>Edit Posting</button></> }
                 </div>
                 })
         }
@@ -68,8 +62,8 @@ const MyPosts = (props) => {
         <div>
                 {renderItems()}
         <br/><br/>
-            <button onClick={() => {props.history.push('/profile')}}>Back to Profile</button>&emsp;&emsp;&emsp;
-            <button onClick ={() => {props.history.push('/post')}}>Add a New Offering</button>        
+            <button className='btn' onClick={() => {props.history.push('/profile')}}>Back to Profile</button>&emsp;&emsp;&emsp;
+            <button className='btn' onClick ={() => {props.history.push('/post')}}>Add a New Offering</button>        
         </div>
     )
 }

@@ -48,6 +48,11 @@ const ItemDetail = props => {
       }
     }
 
+    const showTags = () => {
+      return item.tags.map(tag => {
+        return <>{tag.category[0].toUpperCase().concat(tag.category.slice(1))}</>
+      })
+    }
 
      const renderDetail = () => {
         return (
@@ -64,7 +69,9 @@ const ItemDetail = props => {
                 <p style={{'fontSize': 'large'}}>{item.description}</p>
             <p><b>Ideal Exchange:</b> {item.seeking} </p>
                 <small>Location: {item.location}</small><br/>
-                <small>Estimated Value: {!!item.value ? item.value : "None listed"}</small><br/><br/>
+                <small>Estimated Value: {!!item.value ? item.value : "None listed"}</small><br/>
+                <small>Tagged in: {showTags()}</small>
+                <br/><br/>
             </div>
             <br/>
             <span>Interested in learning more or making an offer?</span><br/>
@@ -80,7 +87,7 @@ const ItemDetail = props => {
             {renderDetail()}
           </div>
           <br/><br/>
-          <button id='detail-back' onClick={() => props.history.push('/items')}>Back to All Items</button>
+          <button className='btn' id='detail-back' onClick={() => props.history.push('/items')}>Back to All Items</button>
         </>
     )
 }

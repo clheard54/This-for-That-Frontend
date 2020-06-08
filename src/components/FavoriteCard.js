@@ -31,7 +31,7 @@ const FavoriteCard = props => {
             <div className={!!offering.image ? 'col-md-7' : 'col-md-11'}>
                 <h5 className="card-title">{offering.title}</h5>
                     <small className="card-text">{offering.description}.<br/><br/>
-                    <Link to={{pathname: offering.type == "Item" ? `/items/${offering.id}` : `/services/${offering.id}`, state: offering}}><button className='btn-pink small'>See More</button></Link>
+                    <Link to={{pathname: offering.type == "Item" ? `/items/${offering.id}` : `/services/${offering.id}`, state: offering}}><button className='btn btn-pink small'>See More</button></Link>
                     {/* <p className="card-text"><small className="text-muted">Posted {postedDate}</small></p> */}
                     </small>
             </div>

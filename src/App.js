@@ -16,6 +16,7 @@ import ItemDetail from './components/ItemDetail';
 import ServiceDetail from './components/ServiceDetail';
 import ServicesCatalog from './containers/ServicesCatalog';
 import Inbox from './containers/Inbox';
+import MessageDetail from './components/MessageDetail'
 import AddOffering from './forms/AddOffering'
 
 class App extends React.Component {
@@ -134,6 +135,11 @@ class App extends React.Component {
                 exact
                 path='/inbox' 
                 render={props => <Inbox {...props}/>} /> 
+
+              <Route 
+                exact
+                path='/inbox/:id' 
+                render={props => <MessageDetail {...props}/>} /> 
         
         
             </div>

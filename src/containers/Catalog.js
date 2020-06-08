@@ -18,7 +18,7 @@ const Catalog = props => {
 
     const renderCategories = () => {
         return itemTags.map(category => {
-            return <><Link to={{pathname: `/items`, filter: {category}}}><button>{category}</button></Link><br/></>
+            return <><Link to={{pathname: `/items`, filter: {category}}}><button className='btn' >{category}</button></Link><br/></>
         })
     }
 

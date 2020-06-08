@@ -122,7 +122,7 @@ const AddOffering = props => {
           <CatalogConsumer>{(catalogContext) => (
               <UserConsumer>{(userContext) => (
                 <Fragment>
-                {complete ? <><h3>Success! Your offering has been posted.</h3><br/><button>Back to Catalog</button><button>Back to Profile</button></> : error ? <><h3>Uh-Oh something went wrong. Please try again...</h3>{error}<br/><button onClick={() => props.history.push('/catalog')}>Back to Catalog</button><button onClick={() => props.history.push('/post')}>Try Again</button></> : <><h2>What you Got?</h2>
+                {complete ? <><h3>Success! Your offering has been posted.</h3><br/><button className='btn' >Back to Catalog</button><button className='btn' >Back to Profile</button></> : error ? <><h3>Uh-Oh something went wrong. Please try again...</h3>{error}<br/><button className='btn' onClick={() => props.history.push('/catalog')}>Back to Catalog</button><button className='btn' onClick={() => props.history.push('/post')}>Try Again</button></> : <><h2>What you Got?</h2>
                     <form onSubmit={handleSubmit}>
                         <label>Are you offering a: &ensp;</label>
                         <div className="btn-group btn-group-toggle" data-toggle="buttons">

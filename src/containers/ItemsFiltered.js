@@ -24,7 +24,7 @@ const ItemsFiltered = props => {
             <h3>{style}</h3>
             <h4>{maker}</h4>
         </div> */}
-        <button onClick={() => this.props.history.push('/items')}>Back to All the Things</button>
+        <button className='btn' onClick={() => this.props.history.push('/items')}>Back to All the Things</button>
         </>
     );
 }

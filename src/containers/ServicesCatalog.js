@@ -80,7 +80,7 @@ const ServicesCatalog = props => {
             <h1 id='caption'>All that People Will Do For You.</h1>
             <div className='row-filter'>
             Filter by Category:&ensp;
-            <Select styles={colorStyles} id='dropdown' isMulti options={showTaskTags()} values={filters.values} onChange={(values) => values==null ? setFilters([]) : setFilters([...values])} /><button onClick={renderServices}>Search</button></div>
+            <Select styles={colorStyles} id='dropdown' isMulti options={showTaskTags()} values={filters.values} onChange={(values) => values==null ? setFilters([]) : setFilters([...values])} /><button className='btn' onClick={renderServices}>Search</button></div>
             <br/><br/>
             <div className='card-row'> 
             {filters.length == 0 ? renderServices() : renderFiltered()}

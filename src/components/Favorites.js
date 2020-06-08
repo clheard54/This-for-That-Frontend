@@ -20,10 +20,17 @@ class Favorites extends Component{
         })
     }
 
+    goToFave = (fave) => {
+        if (fave.offering_type == "Item"){
+            this.props.history.push(`items/{fave.offering_id}`)
+        } else {
+            this.props.history.push(`/services/{fave.offering_id}`)
+        }
+    }
 
     renderFavorites = () => {
         return this.state.favorites.map(fave => {
-            return <FavoriteCard {...this.props} fave={fave}/>
+            return <button id='fave' onClick={() => this.goToFave(fave)}><FavoriteCard {...this.props} fave={fave}/></button>
                 // <ItemCard {...this.props} item={api.getRequests.getItems().then(data => {data.find(x => x.id == fave.offering_id)})}/> : <ServiceCard {...this.props} item={api.getRequests.getServices().then(data => {data.find(x => x.id == fave.offering_id)})} />)
         })
     }

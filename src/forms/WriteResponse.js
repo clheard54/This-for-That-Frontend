@@ -3,23 +3,31 @@ import UserContext from '../context/userContext'
 import LoadUserHOC from '../HOCs/LoadUserHOC'
 import { api } from '../services/api'
 
-const WriteMessage = props => {
+const ResponseMessage = props => {
     const context = useContext(UserContext)
-    const [message, setMessage] = useState('')
+    const [response, setResponse] = useState('')
     const [recipient, setRecipient] = useState({})
     const [complete, setComplete] = useState(false)
     const [error, setError] = useState(false)
-    const { offering } = props
+    const [offering, setOffering] = useState({})
 
     useEffect(() => {
+        {props.message.offering_type == "Item" ? api.getRequests. getItems().then(data => {
+            let offering = data.find(item => props.message.offering_id == item.id);
+            setOffering(offering)
+        }) : api.getRequests.getServices().then(data => {
+            let offering = data.find(task => props.message.offering_id == task.id);
+            setOffering(offering)
+        })}
         api.getRequests.getOwner().then(data => {
-            let owner = data.find(user => offering.user_id == user.id)
-            setRecipient(owner)
+            let recipient = data.find(user => props.message.user_id == user.id)
+            console.log(recipient)
+            setRecipient(recipient)
         })
     }, [])
     
     const handleChange = (e) => {
-        setMessage(e.target.value)
+        setResponse(e.target.value)
     }
 
     const handleSubmit = e => {
@@ -27,12 +35,13 @@ const WriteMessage = props => {
         let newMsg = {
             message: {
                 user_id: context.current_user.id,
-                recipient: recipient,
-                message: message,
+                recipient: recipient.username,
+                message: response,
                 offering_type: !!props.type ? props.type : offering.type,
                 offering_id: offering.id
             }
         }
+        debugger
         api.posts.postMessage(newMsg).then(resp => {
             if (!resp.error){
                 setComplete(true)
@@ -40,7 +49,7 @@ const WriteMessage = props => {
                 setError(resp.error)
             }
         })
-        setMessage('')
+        setResponse('')
     }
 
     return (
@@ -61,7 +70,7 @@ const WriteMessage = props => {
                     <input type='text' name='subject' placeholder={offering.title}></input>
                     <br/><br/>
 
-                    <textarea rows='10' cols='60' name="message" value={message} onChange={handleChange}></textarea>
+                    <textarea rows='10' cols='60' name="message" value={response} onChange={handleChange}></textarea>
                     <br/><br/>
 
                     <input className="btn btn-primary" type='submit' value="Send Message"></input>
@@ -71,4 +80,7 @@ const WriteMessage = props => {
     )
 }
 
-export default LoadUserHOC(WriteMessage);
+export default LoadUserHOC(ResponseMessage);
+
+
+    

@@ -11,11 +11,11 @@ class UserHome extends Component{
       return (
         <div className="flex-container">
         <div className="col" id="inbox">
-            <Inbox />
+            <Inbox {...this.props}/>
         </div>
         <div className="col" >
-            <button onClick={()=>this.props.history.push('/catalog')}>Browse Catalog of Offerings</button><br/>
-            <button onClick ={() => {this.props.history.push('/post')}}>Post an Offering</button><br/><br/><br/><Link to={{pathname: `/myposts`, state: {user_id: this.context.current_user.id}}}><button>Manage Your Posts</button></Link>
+            <button className='btn' onClick={()=>this.props.history.push('/catalog')}>Browse Catalog of Offerings</button><br/>
+            <button className='btn' onClick ={() => {this.props.history.push('/post')}}>Post an Offering</button><br/><br/><br/><Link to={{pathname: `/myposts`, state: {user_id: this.context.current_user.id}}}><button className='btn' >Manage Your Posts</button></Link>
         </div>
         <div className="col" id="favorites">
             <Favorites {...this.props}/>

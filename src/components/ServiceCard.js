@@ -23,7 +23,7 @@ const ServiceCard = props => {
                     <small className='text-muted'><i>Location: {service.location}</i></small></p>
                     {!!service.image ? null :
                     <Link to={{pathname: `/services/${service.id}`,
-                        state: service}}><button className='btn-pink' onClick={()=> viewDetails}>See Details</button></Link>}
+                        state: service}}><button className='btn btn-pink' onClick={()=> viewDetails}>See Details</button></Link>}
                     {/* <p className="card-text"><small className="text-muted">Posted {postedDate}</small></p> */}
             </div>
             {!!service.image ?
@@ -31,7 +31,7 @@ const ServiceCard = props => {
                 <br/>
                 <p><img src={!!service.image.url ? `${service.image.url}` : "https://cultmtl.com/wp-content/uploads/2016/07/barter.jpg"} width="160" alt={`${service.title} - photo1`}/></p>
                 <Link to={{pathname: `/services/${service.id}`,
-                    state: service}}><button className='btn-pink' onClick={()=> viewDetails}>See Details</button></Link>
+                    state: service}}><button className='btn btn-pink' onClick={()=> viewDetails}>See Details</button></Link>
             </div> : null}
             </div>
         </div>

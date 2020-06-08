@@ -80,7 +80,7 @@ const ServiceDetail = props => {
             {renderDetail()}
           </div>
           <br/><br/>
-          <button id='detail-back' onClick={() => props.history.push('/services')}>Back to All Services</button>
+          <button className='btn' id='detail-back' onClick={() => props.history.push('/services')}>Back to All Services</button>
         </>
     )
 }

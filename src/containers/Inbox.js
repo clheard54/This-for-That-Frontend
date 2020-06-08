@@ -14,27 +14,22 @@ class Inbox extends Component{
 
     state = {
         messages: [],
-        detail: null,
         reply: false
     }
 
     componentDidMount(){
         api.getRequests.getMessages().then(data => {
             if (data.length > 0){
-                let myMessages = data.filter(msg => msg.recipient == this.context.current_user);
+                let myMessages = data.filter(msg => msg.recipient == this.context.current_user.username);
                 this.setState({ messages: myMessages })
             }
         });
     }
 
-    showMessage = (msg) => {
-        this.props.history.push('/inbox')
-        this.setState({detail: msg})
-    }
 
     renderMessageCards = () => {
         return this.state.messages.map(msg => {
-            return <button onClick={() => this.showMessage(msg)}><MessageCard {...this.props} message={msg}></MessageCard></button>
+            return (<MessageCard {...this.props} message={msg} messages={this.state.messages}></MessageCard>)
         })
         //map through state messages and return <MessageCard> for each</MessageCard>
     }
@@ -46,24 +41,11 @@ class Inbox extends Component{
     render(){
         return (
            <>
-           <Link className='link' to={{pathname: '/inbox', state:{fromProf: true}}}><h2>Inbox</h2></Link>
-            {!this.props.location ?
+           <Link className='link' to={{pathname: `/inbox/`, state:{fromProf: true}}}><h2>Inbox</h2></Link>
                 <div>
                     <p>These are your messages</p>
                     {this.renderMessageCards()}
-                </div> : 
-                <div className='flex-container'>
-                    <div className='col col-md-4 inbox-col'>
-                        <p>These are your messages</p>
-                        {this.renderMessageCards()}
-                    </div>
-                    <div className='col col-md-8'>
-                    {!!this.state.detail ?
-                    <MessageDetail {...this.props} message={this.state.detail}/> : <><h3>No Messages in your inbox</h3></> }
-                    </div>
-                    {this.state.reply ? <WriteMessage /> : null}
                 </div>
-            }
               </>
         )
     }
