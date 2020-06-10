@@ -6,23 +6,21 @@ import { api } from '../services/api'
 const ResponseMessage = props => {
     const context = useContext(UserContext)
     const [response, setResponse] = useState('')
-    const [recipient, setRecipient] = useState({})
+    const [recipient, setRecipient] = useState('')
     const [complete, setComplete] = useState(false)
     const [error, setError] = useState(false)
     const [offering, setOffering] = useState({})
 
     useEffect(() => {
-        {props.message.offering_type == "Item" ? api.getRequests. getItems().then(data => {
-            let offering = data.find(item => props.message.offering_id == item.id);
-            setOffering(offering)
-        }) : api.getRequests.getServices().then(data => {
+        {props.message.offering_type == "Task" ? api.getRequests. getServices().then(data => {
             let offering = data.find(task => props.message.offering_id == task.id);
+            setOffering(offering)
+        }) : api.getRequests.getItems().then(data => {
+            let offering = data.find(item => props.message.offering_id == item.id);
             setOffering(offering)
         })}
         api.getRequests.getOwner().then(data => {
-            let recipient = data.find(user => props.message.user_id == user.id)
-            console.log(recipient)
-            setRecipient(recipient)
+            setRecipient(data.find(user => props.message.user_id == user.id).username)
         })
     }, [])
     
@@ -35,13 +33,12 @@ const ResponseMessage = props => {
         let newMsg = {
             message: {
                 user_id: context.current_user.id,
-                recipient: recipient.username,
+                recipient: recipient,
                 message: response,
-                offering_type: !!props.type ? props.type : offering.type,
+                offering_type: !!props.type ? props.type : !!offering ? offering.type : "Item",
                 offering_id: offering.id
             }
         }
-        debugger
         api.posts.postMessage(newMsg).then(resp => {
             if (!resp.error){
                 setComplete(true)
@@ -67,7 +64,7 @@ const ResponseMessage = props => {
                     {/* <br/><br/> */}
 
                     <label>Subject:&ensp;</label>
-                    <input type='text' name='subject' placeholder={offering.title}></input>
+                    <input type='text' name='subject' placeholder={offering ? offering.title : 'Hello'}></input>
                     <br/><br/>
 
                     <textarea rows='10' cols='60' name="message" value={response} onChange={handleChange}></textarea>

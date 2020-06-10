@@ -18,14 +18,14 @@ const Catalog = props => {
 
     const renderCategories = () => {
         return itemTags.map(category => {
-            return <><Link to={{pathname: `/items`, filter: {category}}}><button className='btn' >{category}</button></Link><br/></>
+            return <><Link to={{pathname: `/items`, state: {filter: category}}}><button className='btn' >{category}</button></Link><br/></>
         })
     }
 
 
     const renderTaskTags = () => {
         return taskTags.map(tag => {
-            return <><Link to={{pathname: `/services`, filter: {tag}}}><button>{tag}</button></Link><br/></>
+            return <><Link to={{pathname: `/services`, state: {filter: tag}}}><button className='btn'>{tag}</button></Link><br/></>
         })
     }
 

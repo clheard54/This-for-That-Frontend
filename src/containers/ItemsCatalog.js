@@ -16,8 +16,8 @@ const ItemsCatalog = props => {
         if (items.length == 0){
             populateContext()
         };
-        if (!!props.location.filter){
-            setFilters(props.location.filter)
+        if (!!props.location.state.filter){
+            setFilters([...filters, props.location.state.filter])
         }
     }, [])
 
@@ -42,11 +42,15 @@ const ItemsCatalog = props => {
             let x = items.filter(item => item.tags.map(tag => tag.category).includes(entry.value))
             x.forEach(entry => allFiltered.includes(entry) ? null : allFiltered.push(entry))
         })
-        console.log(allFiltered)
-        return allFiltered.map(item => {
-            return <ItemCard {...props} item={item} />
-        })
+        if (allFiltered.length == 0){
+            return (<div className='col-md-6'><h3>Alas! No such offerings posted right now.</h3><p style={{'color': 'rgb(66, 230, 134)'}}>(Try again soon!)</p></div>)
+        } else {
+            return allFiltered.map(item => {
+                return <ItemCard {...props} item={item} />
+            })
+        }
     }
+        
 
     const showItemsTags = () => {
         if(!!itemTags){

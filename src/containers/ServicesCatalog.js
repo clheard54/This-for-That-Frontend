@@ -25,7 +25,7 @@ const ServicesCatalog = props => {
     const renderServices = () => {
         if (filters.length == 0) {
             if (services.length == 0){
-                return (<><h3>Alas! No offerings posted right now.</h3><br/><p style={{'color': 'rgb(66, 230, 134)'}}>(Try again soon!)</p></>)
+                return (<><h3>Alas! No offerings posted right now.</h3><p style={{'color': 'rgb(66, 230, 134)'}}>(Try again soon!)</p></>)
             } else {
                 return services.map(service => {
                     return <ServiceCard {...props} service={service} onClick={() => goToDetail()}/>
@@ -47,7 +47,7 @@ const ServicesCatalog = props => {
             x.forEach(entry => allFiltered.includes(entry) ? null : allFiltered.push(entry))
         })
         if (allFiltered.length == 0){
-            return (<><h3 style={{'color': 'rgb(66, 230, 134)'}}>Alas! No such offerings posted right now.</h3><p style={{'color': 'rgb(66, 230, 134)'}}>(Try again soon!)</p></>)
+            return (<div><h3>Alas! No such offerings posted right now.</h3><p style={{'color': 'rgb(66, 230, 134)'}}>(Try again soon!)</p></div>)
         } else {
         return allFiltered.map(service => {
             return <ServiceCard {...props} service={service} />
@@ -78,13 +78,16 @@ const ServicesCatalog = props => {
     return (
         <div className='container'>
             <h1 id='caption'>All that People Will Do For You.</h1>
+            <br/>
             <div className='row-filter'>
             Filter by Category:&ensp;
-            <Select styles={colorStyles} id='dropdown' isMulti options={showTaskTags()} values={filters.values} onChange={(values) => values==null ? setFilters([]) : setFilters([...values])} /><button className='btn' onClick={renderServices}>Search</button></div>
-            <br/><br/>
-            <div className='card-row'> 
-            {filters.length == 0 ? renderServices() : renderFiltered()}
-           </div>
+            <Select styles={colorStyles} id='dropdown' isMulti options={showTaskTags()} values={filters.values} onChange={(values) => values==null ? setFilters([]) : setFilters([...values])} /></div>
+            <br/><br/> 
+            {filters.length == 0 ? 
+                (<div>
+                    {renderServices()}
+                </div>) :
+                <div>{renderFiltered()}</div>}
         </div>
            
     )
