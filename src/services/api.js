@@ -118,7 +118,7 @@ const postMessage = (newMessage) => {
   }).then(res => res.json())
 }
 
-const postTagOffering = (tag, type, item) => {
+const postTagOffering = (tag, typeOf, item) => {
   let tag_id
   fetch(`{API_ROOT}/tags`).then(resp => resp.json())
   .then(data => {
@@ -128,7 +128,7 @@ const postTagOffering = (tag, type, item) => {
   return fetch(`${API_ROOT}/tags_offerings`, {
     method: 'POST',
     headers: headers(),
-    body: JSON.stringify({tag_id: tag.id, offering_type: type, offering_id: item.id})
+    body: JSON.stringify({tag_id: tag.id, offering_type: typeOf, offering_id: item.id})
   }).then(res => res.json())
 }
 

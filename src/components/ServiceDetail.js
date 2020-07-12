@@ -11,7 +11,7 @@ const ServiceDetail = props => {
     const [msg, setMsg] = useState(false)
     const [favorite, setFavorite] = useState({})
     const [error, setError] = useState(false)
-    const service = props.services.find(x => x.id == props.match.params.id)
+    const service = !!props.services ? props.services.find(x => x.id == props.match.params.id) : props.location.state
 
     useEffect(() => {
       api.getRequests.getFavorites().then(data => {
@@ -68,7 +68,7 @@ const ServiceDetail = props => {
             </div>
             <br/>
             <span>Interested in learning more or making an offer?</span><br/>
-            {!msg ? <><br/><button className='btn btn-primary' onClick={()=>setMsg(true)}>Write Message</button></> : <WriteMessage type='service' offering={service}/> }
+            {!msg ? <><br/><button className='btn btn-primary' onClick={()=>setMsg(true)}>Write Message</button></> : <WriteMessage typeOf='service' offering={service}/> }
                 
 
             </> )

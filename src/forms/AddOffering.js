@@ -5,7 +5,7 @@ import { CatalogConsumer } from '../context/CatalogContext'
 import { api } from '../services/api'
 
 const AddOffering = props => {
-    const [type, setType] = useState('Item')
+    const [typeOf, setTypeOf] = useState('Item')
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [location, setLocation] = useState('')
@@ -27,9 +27,9 @@ const AddOffering = props => {
     }
 
     const handleTypeChange = e => {
-      document.getElementById(`option-${type}`).style.backgroundColor = "#007bff"
-      setType(e.target.value)
-      document.getElementById(`option-${type}`).style.backgroundColor = "#0069d9"
+      document.getElementById(`option-${typeOf}`).style.backgroundColor = "#007bff"
+      setTypeOf(e.target.value)
+      document.getElementById(`option-${typeOf}`).style.backgroundColor = "#0069d9"
     };
     
 
@@ -68,7 +68,7 @@ const AddOffering = props => {
     const buildFormData = (id) => {
       let formData = new FormData();
       formData.append('item[title]', title);
-      formData.append('item[type', type);
+      formData.append('item[typeOf', typeOf);
       formData.append('item[description]', description);
       formData.append('item[location]', location);
       formData.append('item[value]', value);
@@ -90,7 +90,7 @@ const AddOffering = props => {
       event.preventDefault();
       let id = event.target.userID.value;
       const newOffering = buildFormData(id)
-      type == "Item" ? 
+      typeOf == "Item" ? 
       api.posts.postItem(newOffering).then(resp => {
           if (!resp.error){
               setComplete(true)
@@ -113,7 +113,7 @@ const AddOffering = props => {
           .forEach(checkbox => {
             //create new TagsOffering instance;
             console.log(checkbox)
-            api.posts.postTagOffering(checkbox, type, id)
+            api.posts.postTagOffering(checkbox, typeOf, id)
           });
       };
 
@@ -126,10 +126,10 @@ const AddOffering = props => {
                     <form onSubmit={handleSubmit}>
                         <label>Are you offering a: &ensp;</label>
                         <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                          <label className={type == 'Item' ? "btn btn-aqua active" : "btn btn-aqua"}>
-                            <input type="radio" name="options" id="option-item" value="Item" checked={type == 'Item'} onChange={handleTypeChange}></input>Thing</label><span style={{'alignSelf': 'center'}}>&emsp;-OR-&emsp;</span>
-                          <label className={type == 'Task' ? "btn btn-aqua active" : "btn btn-aqua"}>
-                            <input type="radio" name="options" id="option-task" value="Task" checked={type == 'Task'} onChange={handleTypeChange}></input>Task</label>
+                          <label className={typeOf == 'Item' ? "btn btn-aqua active" : "btn btn-aqua"}>
+                            <input type="radio" name="options" id="option-item" value="Item" checked={typeOf == 'Item'} onChange={handleTypeChange}></input>Thing</label><span style={{'alignSelf': 'center'}}>&emsp;-OR-&emsp;</span>
+                          <label className={typeOf == 'Task' ? "btn btn-aqua active" : "btn btn-aqua"}>
+                            <input type="radio" name="options" id="option-task" value="Task" checked={typeOf == 'Task'} onChange={handleTypeChange}></input>Task</label>
                         </div>
                         <br/><br/>
 

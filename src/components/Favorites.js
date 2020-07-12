@@ -30,7 +30,7 @@ class Favorites extends Component{
 
     renderFavorites = () => {
         return this.state.favorites.map(fave => {
-            return <button id='fave' onClick={() => this.goToFave(fave)}><FavoriteCard {...this.props} fave={fave}/></button>
+            return !!fave.id ? <button id='fave' onClick={() => this.goToFave(fave)}><FavoriteCard {...this.props} fave={fave}/></button> : null
                 // <ItemCard {...this.props} item={api.getRequests.getItems().then(data => {data.find(x => x.id == fave.offering_id)})}/> : <ServiceCard {...this.props} item={api.getRequests.getServices().then(data => {data.find(x => x.id == fave.offering_id)})} />)
         })
     }

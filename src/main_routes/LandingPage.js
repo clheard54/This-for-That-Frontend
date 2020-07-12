@@ -10,8 +10,8 @@ function LandingPage(props){
 
     return(
         <Fragment>
-        <svg class="defs-only" style={{'display': 'none'}}>
-        <filter id="monochrome" color-interpolation-filters="sRGB"
+        <svg className="defs-only" style={{'display': 'none'}}>
+        <filter id="monochrome" colorInterpolationFilters="sRGB"
                 x="0" y="0" height="100%" width="100%">
             <feColorMatrix type="matrix"
             values="0.95 0 0 0 0.05 

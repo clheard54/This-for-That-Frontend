@@ -16,7 +16,7 @@ const ItemsCatalog = props => {
         if (items.length == 0){
             populateContext()
         };
-        if (!!props.location.state.filter){
+        if (!!props.location.state){
             setFilters([...filters, props.location.state.filter])
         }
     }, [])

@@ -75,7 +75,7 @@ const ItemDetail = props => {
             </div>
             <br/>
             <span>Interested in learning more or making an offer?</span><br/>
-            {!msg ? <><br/><button className='btn btn-primary' onClick={()=>setMsg(true)}>Write Message</button></> : <WriteMessage type='Item' offering={item}/> }
+            {!msg ? <><br/><button className='btn btn-primary' onClick={()=>setMsg(true)}>Write Message</button></> : <WriteMessage typeOf='Item' offering={item}/> }
                 
 
             </> )

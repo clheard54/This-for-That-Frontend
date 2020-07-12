@@ -5,7 +5,7 @@ import ImageDropzone from './Dropzone'
 
 const EditForm = props => {
     const context = useContext(UserContext)
-    const {offering, type} = props
+    const {offering, typeOf} = props
     const [title, setTitle] = useState(offering.title)
     const [description, setDescription] = useState(offering.description)
     const [location, setLocation] = useState(offering.location)
@@ -27,9 +27,9 @@ const EditForm = props => {
       const submitEdits = event => {
         event.preventDefault();
         const formData = new FormData();
-        if (type == "Item"){ 
+        if (typeOf == "Item"){ 
             formData.append('item[title]', title);
-            formData.append('item[type]', type)
+            formData.append('item[typeOf]', typeOf)
             formData.append('item[description]', description);
             formData.append('item[location]', location);
             formData.append('item[value]', value);
@@ -46,7 +46,7 @@ const EditForm = props => {
             })
         } else {
             formData.append('service[title]', title);
-            formData.append('service[type]', type)
+            formData.append('service[typeOf]', typeOf)
             formData.append('service[description]', description);
             formData.append('service[location]', location);
             formData.append('service[value]', value);

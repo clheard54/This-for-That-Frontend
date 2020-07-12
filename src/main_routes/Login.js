@@ -25,7 +25,7 @@ function Login (props) {
             }
             setUsername('')
             setPassword('')
-        }, () => this.props.history.push('/profile'))
+        })
     }
 
     return (

@@ -35,7 +35,7 @@ const ResponseMessage = props => {
                 user_id: context.current_user.id,
                 recipient: recipient,
                 message: response,
-                offering_type: !!props.type ? props.type : !!offering ? offering.type : "Item",
+                offering_type: !!props.typeOf ? props.typeOf : !!offering ? offering.typeOf : "Item",
                 offering_id: offering.id
             }
         }

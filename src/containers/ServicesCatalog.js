@@ -84,10 +84,10 @@ const ServicesCatalog = props => {
             <Select styles={colorStyles} id='dropdown' isMulti options={showTaskTags()} values={filters.values} onChange={(values) => values==null ? setFilters([]) : setFilters([...values])} /></div>
             <br/><br/> 
             {filters.length == 0 ? 
-                (<div>
+                (<div className="card-row">
                     {renderServices()}
                 </div>) :
-                <div>{renderFiltered()}</div>}
+                <div className="card-row">{renderFiltered()}</div>}
         </div>
            
     )

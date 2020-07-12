@@ -29,7 +29,7 @@ const WriteMessage = props => {
                 user_id: context.current_user.id,
                 recipient: recipient,
                 message: message,
-                offering_type: !!props.type ? props.type : offering.type,
+                offering_type: !!props.typeOf ? props.typeOf : offering.typeOf,
                 offering_id: offering.id
             }
         }
